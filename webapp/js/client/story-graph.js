@@ -329,33 +329,13 @@ StoryGraph.prototype.drawNetwork = function(placeId, width, height, config) {
         nodeGSelector = nodeSelector.enter()
             .append("g")
             .attr("class", "node")
-            .attr("id", function(d) { return "SG_Node_" + d.index; })
             .call(force.drag);
         
-        var topSelection = nwNodes; //sg.distr.SelectTopFrom(nwNodes, 3, function(d) { return d.data.referenceCount; });
-        var showData = Boolean(referencesList && referencesList.length > 0);
-        if (showData) {
-            for (var i in topSelection)
-                topSelection[i].text = topSelection[i].data.title;
-        } else {
-            for (var i in topSelection)
-                topSelection[i].text = "";
-        }
-
-        for (var i in topSelection) {
-            var node = topSelection[i];
-            d3.select("#SG_Node_" + node.index)
-                .append("text")
-                .attr("class", "nodetext")
-                .attr("dx", 12)
-                .attr("dy", ".35em")
-                .text(function(d) { return d.text;});
-        }
-
         nodeGSelector.append("text")
             .attr("dx", 12)
             .attr("dy", ".35em")
-            .text(function(d) { console.log(d); return d.text; });
+            .attr("class", "nodetext")
+            .text(function(d) { return d.text; });
 
         nodeGSelector.append("circle")
             .attr("cx", 0)
