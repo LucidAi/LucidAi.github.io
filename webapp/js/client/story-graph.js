@@ -335,12 +335,12 @@ StoryGraph.prototype.drawNetwork = function(placeId, width, height, config) {
             .attr("dx", 12)
             .attr("dy", ".35em")
             // .attr("class", "nodetext")
-            .text(function(d) { return d.text; });
+            .text(function(d) { return d.title; });
 
-        nodeGSelector.append("circle")
-            .attr("cx", 0)
-            .attr("cy", 0)
-            .attr("r", function(d) { return d.radius; });
+        // nodeGSelector.append("circle")
+        //     .attr("cx", 0)
+        //     .attr("cy", 0)
+        //     .attr("r", function(d) { return d.radius; });
 
 
         linkSelector.exit().remove();
