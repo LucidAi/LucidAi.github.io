@@ -330,13 +330,11 @@ StoryGraph.prototype.drawNetwork = function(placeId, width, height, config) {
             .append("g")
             .attr("class", "node")
             .call(force.drag);
-        
         nodeGSelector.append("circle")
             .attr("cx", 0)
             .attr("cy", 0)
             .attr("class", "nodecircle")
             .attr("r", function(d) { return d.radius; });
-
         nodeGSelector.append("text")
             .attr("dx", 12)
             .attr("dy", ".35em")

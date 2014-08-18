@@ -310,7 +310,15 @@ rect {
                         ng-class="{danger: node.inSelection}">
                       <td>
                         <span class="glyphicon glyphicon-star" ng-show="node.refId==central.refId"></span>
-                        <a href="{{node.url}}">{{node.title|cut:true:40:' ...'}}</a>
+                        <a href="{{node.url}}"
+                           class="tip-popover"
+                           data-toggle="popover"
+                           data-placement="left"
+                           title="{{node.title}}"
+                           data-content="{{node.text:cut:true:256' ...'}}"
+                        >
+                          {{node.title|cut:true:40:' ...'}}
+                        </a>
                         <!-- <a style="cursor:pointer;">focus</a> -->
                         <!-- <a style="cursor:pointer;" class="glyphicon glyphicon-info-sign"></a> -->
                       </td>
@@ -344,7 +352,7 @@ rect {
                 <div>
                   <p class="lead">
                     Sorry! This tab is not implemented yet :-(<br/>
-                    Our robots are working to finish this soon! Please comeback later.
+                    Our robots are working hard to finish this soon! Please comeback later.
                   </p>
                 </div>
               </div>
