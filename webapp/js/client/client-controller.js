@@ -42,7 +42,7 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
 
 
         NcldApiFactory.getTestGraph().success(function(data){
-                        
+            
             $scope.sg = new StoryGraph(data);
             $scope.central = $scope.sg.getCentralNode();
             $scope.related = $scope.sg.getNodes();

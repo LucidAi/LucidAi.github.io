@@ -11,6 +11,8 @@ function StoryGraph(data) {
      *
      */
 
+    console.log(data);
+
     this.data = data;
     this.gfx = {};
     this.distr = null;
