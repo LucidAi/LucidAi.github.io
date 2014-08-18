@@ -44,11 +44,12 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
         // Init tooltipe
         $(".tip-tooltip").tooltip({
             "animation": true,
-            "placement": "top"
+            "placement": "top",
         });
         
-        $('.tip-popover').popover({
-          trigger: 'focus'
+        $(".tip-popover").popover({
+              "trigger": "focus",
+              "selector": ".tip-popover"
         });
 
         NcldApiFactory.getTestGraph().success(function(data){
