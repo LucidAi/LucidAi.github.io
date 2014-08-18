@@ -42,7 +42,7 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
         
         
         // Init tooltipe
-        $("tip-tooltip").tooltip({
+        $(".tip-tooltip").tooltip({
             "animation": true,
             "placement": "top"
         });
