@@ -342,14 +342,15 @@ StoryGraph.prototype.drawNetwork = function(placeId, width, height, config) {
                 topSelection[i].text = "";
         }
 
-        // for (var i in topSelection) {
-        //     var node = topSelection[i];
-        //     d3.select("#SG_Node_" + node.index)
-        //         .append("text")
-        //         .attr("dx", 12)
-        //         .attr("dy", ".35em")
-        //         .text(function(d) { console.log(d.text); d.text;});
-        // }
+        for (var i in topSelection) {
+            var node = topSelection[i];
+            d3.select("#SG_Node_" + node.index)
+                .append("text")
+                .attr("class", "nodetext")
+                .attr("dx", 12)
+                .attr("dy", ".35em")
+                .text(function(d) { return d.text;});
+        }
 
         nodeGSelector.append("text")
             .attr("dx", 12)
