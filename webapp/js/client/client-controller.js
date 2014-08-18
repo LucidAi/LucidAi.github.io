@@ -49,7 +49,7 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
         
         $(".tip-popover").popover({
               "trigger": "focus",
-              "selector": ".tip-popover"
+              "selector": ".all-tab-row"
         });
 
         NcldApiFactory.getTestGraph().success(function(data){

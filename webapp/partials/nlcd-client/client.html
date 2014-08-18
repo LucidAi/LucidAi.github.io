@@ -306,14 +306,13 @@ rect {
                   </thead>
 
                   <tbody>
-                    <tr ng-repeat="node in related | orderBy : display.relatedTabAllPredicate : display.relatedTabAllReversed"
+                    <tr class="all-tab-row" ng-repeat="node in related | orderBy : display.relatedTabAllPredicate : display.relatedTabAllReversed"
                         ng-class="{danger: node.inSelection}">
                       <td>
                         <span class="glyphicon glyphicon-star" ng-show="node.refId==central.refId"></span>
                         <a href="{{node.url}}"
-                           class="tip-popover"
+                           class="tip-popover popover-dismiss"
                            data-toggle="popover"
-                           data-placement="left"
                            title="{{node.title}}"
                            data-content="{{node.text|cut:true:256:' ...'}}"
                         >
