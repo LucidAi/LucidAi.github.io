@@ -132,11 +132,20 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
         //
         $scope.toolPopoverContent = function(node) {
             
+            var authors = node.authors.join(", ").toTitleCase();
+            var source = "";
+            var len = 10000;
+            for (var i in node.sources) {
+                if (node.sources[i].length < len) {
+                    source = node.sources[i];
+                    len = node.sources[i].length;
+                }
+            }
             
             return "<ul><li>authror: "
-                   + node.authors.join(", ").toTitleCase()
+                   + authors
                    + "</li><li>source: "
-                   + node.sources[0]
+                   + source
                    + "</li></ul><p><small>"
                    + String.prototype.CutStr(node.body, true, 256, "...")
                    + "</small><p>";
