@@ -137,9 +137,9 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
                    + node.authors.join(", ").toTitleCase()
                    + "</li><li>source: "
                    + node.sources[0]
-                   + "</li></ul><p>"
+                   + "</li></ul><p><small>"
                    + node.body
-                   + "<p>";
+                   + "</small><p>";
         }
 
 }]);
