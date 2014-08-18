@@ -306,7 +306,7 @@ rect {
                   </thead>
 
                   <tbody>
-                    <tr class="all-tab-row" ng-repeat="node in related | orderBy : display.relatedTabAllPredicate : display.relatedTabAllReversed"
+                    <tr ng-repeat="node in related | orderBy : display.relatedTabAllPredicate : display.relatedTabAllReversed"
                         ng-class="{danger: node.inSelection}">
                       <td>
                         <span class="glyphicon glyphicon-star" ng-show="node.refId==central.refId"></span>
