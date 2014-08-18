@@ -42,8 +42,8 @@
       <div class="jumbotron">
         <h1>Mediator</h1>
         <p class="lead">
-          Automatic Detection of Interconnections, Factual Contradictions, and Bias
-          in Written Web Media
+          Detection of Interconnections, Factual Contradictions, Bias, and Coordinated campaigns
+          in Web Media
         </p>
       </div>
 
@@ -53,39 +53,37 @@
 
           <p>
           Mass media is a powerful political, economical, and social weapon. It is used to promote products, win elections, push scientific research, justify wars. Internet provides news readers and news producers with a real-time access to ever-growing amounts of diverse information, but it also poses significant challenges for the society. Popularity of social media (blogs and social networks) takes the monopoly on information distribution away from traditional media (newspapers and television). At the same time, it allows for quick distribution of false or unsubstantiated claims and biased news stories as well as for easier and imperceptible propagation of ideas by paid or ideologically driven groups of people.
-
-          Social behaviour is influenced by opinions. In order to develop well-founded opinions, we need to be exposed to balanced credible information, we need to be aware of information manipulation and media bias.          </p>
-          In this project, we aim at developing computational tools for media analysis available for the community, which can crucially help media scientists, journalists, and news readers to navigate in the ocean of news stories and opinions.
-          Our goals are 1)~to facilitate researchers performing manual analysis of mass media by providing them with computational media analysis tools, 2)~to facilitate news producers by providing them with tools for information tracking and validation, 3)~to support news readers in discovering diverse viewpoints and being aware of information manipulation.
+          </p>
+          <p>
+          Social behaviour is influenced by opinions. In order to develop well-founded opinions, we need to be exposed to balanced credible information, we need to be aware of information manipulation and media bias.         
+          In this project, we aim at developing computational tools for media analysis available for the community, which can help media scientists, journalists, and news readers to navigate in the ocean of news stories and opinions.
           Specifically, we work on developing the following tools.
+          </p>
         
           <h4>News life cycle detector</h4>
           <p>
-            We propose a service that will detect a “life cycle” of a piece of news. It will allow news readers to track the piece of news back to it origins, see other citations of the original text together with the publishing source and the date of publishing.
+            Knowing the source of a media item is crucial for evaluating its credibility. For each news item (image, text, link), we will automatically build a "life timeline" showing who was the first to publish this item, who cited and recited it, who modified it and how.
           </p>
 
-
-          <h4>Contradiction detector</h4>
           <p>
-            Often news documents discussing the same topic may contain mutually contradicting statements. Furthermore, news statements can contradict historic, cultural, or scientific facts. Examples of such contradictions in the speeches of politicians are manually discovered and published by the <a href="http://www.factcheck.org/">FactCheck</a> project. In order to make it easier for the reader to decide whether to trust a particular news source, we aim at discovering these contradictions automatically and making them explicit.
+            The prototype demo of News Life Cycle Detector is available. ADD LINK.
           </p>
+
+          <h4>Factual check</h4>
           <p>
-            We propose a service that will detect all statements in a piece of text and find documents on the web that contain contradicting or supporting statements.
+            News articles may contain incorrect or unmotivated claims. We will develop a service that will detect all statements in a piece of text and find documents on the web that contain contradicting or supporting statements.
           </p>
 
 
           <h4>Bias detector</h4>
           <p>
-            Different propaganda methods are used in the media: indirect statements, repetitions, half-true, logical mistakes, provocations, manipulations with emotions, etc. (cf. International Encyclopedia of Propaganda by Robert Cole). For example, the project <a href="http://www.medialens.org">Media Lens provides</a> a detailed analysis of news articles containing biased statements.
-          </p>
-          <p>
-            We propose a service that will detect biased linguistic expressions in news texts and mark them with predefined propaganda class labels.
+            The selective exposure theory shows that news readers mostly access information that suits their viewpoints. At the same time, being exposed to diverse information and being aware of the news article bias is important for developing balanced views and correcting inaccurate beliefs. We will develop methods for detecting bias in news texts and clustering together news articles having a similar perspective, which will allow us to present diverse articles coming from different perspective clusters to news readers.
           </p>
 
 
-          <h4>Perspective detector</h4>
+          <h4>Astroturfing detector</h4>
           <p>
-            Finally, given a news article, we'd like to visualize its life cycle, detect fact contradictions and bias in it and assign this article to a cluster of articles with a similar bias that represents interests of a certain social group: a political party, oil companies, bankers, environment activists, etc.
+            It is natural to assume that the most trusted claims are those that most sources agree with. However, in the current media situation, small groups of paid or ideologically driven people can significantly change the media landscape by pushing certain opinions. We will develop methods for automatically identifying cases of manufactured spread of opinions. 
           </p>
 
         </div>
