@@ -50,6 +50,7 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
         $("body").popover({
               "trigger": "hover",
               "delay": 1,
+              "html": true,
               "placement": "right",
               "selector": ".tip-popover"
         });

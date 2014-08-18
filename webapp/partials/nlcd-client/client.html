@@ -310,12 +310,15 @@ rect {
                         ng-class="{danger: node.inSelection}">
                       <td>
                         <span class="glyphicon glyphicon-star" ng-show="node.refId==central.refId"></span>
-                        <a
+                        <a href="{{node.url}}"
                            class="tip-popover"
                            data-toggle="popover"
                            title="{{node.title}}"
-                           data-content="{{node.text|cut:true:256:' ...'}}"
+                           data-content="<ul><li>authror:{{node.authors.join(", ").toTitleCase()}}</li><li>source: {{node.sources[0]}}</li></ul> <p>{{node.body|cut:true:256:' ...'}}<p>"
                         >
+                        
+                        
+                                              
                           {{node.title|cut:true:40:' ...'}}
                         </a>
                         <!-- <a style="cursor:pointer;">focus</a> -->
