@@ -46,7 +46,7 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
             $scope.sg = new StoryGraph(data);
             $scope.central = $scope.sg.getCentralNode();
             $scope.related = $scope.sg.getNodes();
-            $scope.meta = data.data.meta;
+            $scope.meta = data.meta;
 
 
             var distrPlaceId = "storyDistribution";
