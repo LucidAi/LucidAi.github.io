@@ -138,7 +138,7 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
                    + "</li><li>source: "
                    + node.sources[0]
                    + "</li></ul><p><small>"
-                   + node.body
+                   + String.prototype.CutStr(node.body, true, 256, "...")
                    + "</small><p>";
         }
 
