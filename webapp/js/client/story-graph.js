@@ -335,7 +335,7 @@ StoryGraph.prototype.drawNetwork = function(placeId, width, height, config) {
             .attr("dx", 12)
             .attr("dy", ".35em")
             // .attr("class", "nodetext")
-            .text(function(d) { return d.title; });
+            .text(function(d) { return d.data.title; });
 
         // nodeGSelector.append("circle")
         //     .attr("cx", 0)
