@@ -217,33 +217,33 @@ rect {
             <!-- Related Tabs -->
             <ul id="relatedTabs" class="nav nav-tabs" role="tablist">
 
-              <li style="cursor:pointer;" class="active tip-tooltip" data-toggle="tooltip" title="Some tooltip text!">
+              <li style="cursor:pointer;" class="active tip-tooltip" data-toggle="tooltip" title="View all related documents">
                 <a role="tab" data-toggle="tab" class="text-uppercase" data-target="#relatedTabAll">all {{related.length}}</a>
               </li>
 
-              <li style="cursor:pointer;">
+              <li style="cursor:pointer;" data-toggle="tooltip" class="tip-tooltip" title="Filter related by text query">
                 <a role="tab" data-toggle="tab" class="text-uppercase" data-target="#relatedTabFilter">search</a>
               </li>
 
-              <li style="cursor:pointer;">
+              <li style="cursor:pointer;" data-toggle="tooltip" class="tip-tooltip" title="View only cited">
                 <a role="tab" data-toggle="tab" class="text-uppercase" data-target="#relatedTabCit">cit.</a>
               </li>
 
 
-              <li style="cursor:pointer;">
+              <li style="cursor:pointer;" data-toggle="tooltip" class="tip-tooltip" title="View related authors">
                 <a role="tab" data-toggle="tab" class="text-uppercase" data-target="#relatedTabAuthors">authors</a>
               </li>
 
-              <li style="cursor:pointer;">
+              <li style="cursor:pointer;" data-toggle="tooltip" class="tip-tooltip" title="View related sources">
                 <a role="tab" data-toggle="tab" class="text-uppercase" data-target="#relatedTabSources">src.</a>
               </li>
 
-              <li style="cursor:pointer;">
+              <li style="cursor:pointer;" data-toggle="tooltip" class="tip-tooltip" title="Select documents by dates">
                 <a role="tab" data-toggle="tab" class="text-uppercase" data-target="#relatedTabDates">dates</a>
               </li>
 
-              <li style="cursor:pointer;">
-                <a role="tab" data-toggle="tab" class="text-uppercase" data-target="#relatedTabSelection">selection {{selection.length}}</a>
+              <li style="cursor:pointer;" data-toggle="tooltip" class="tip-tooltip" title="See selected articles">
+                <a role="tab" data-toggle="tab" class="text-uppercase"  data-target="#relatedTabSelection">selection {{selection.length}}</a>
               </li>
 
 
@@ -333,16 +333,24 @@ rect {
               <!-- END:ALL -->
 
 
-              <!-- PANE:CIT -->
-              <div class="tab-pane fade" id="relatedTabCit">
-              </div>
-              <!-- END:CIT -->
-
-
               <!-- PANE:FILTER -->
               <div class="tab-pane fade" id="relatedTabFilter">
               </div>
               <!-- END:FILTER -->
+
+
+              <!-- PANE:CIT -->
+              <div class="tab-pane fade" id="relatedTabCit">
+                <div>
+                  <p>
+                    Sorry! Not implemented yet :-(
+                  </p>
+                  <p>
+                    Our robot are working to finish it soon! Please comeback later.
+                  </p>
+                </div>
+              </div>
+              <!-- END:CIT -->
 
 
               <!-- PANE:AUTHORS -->
