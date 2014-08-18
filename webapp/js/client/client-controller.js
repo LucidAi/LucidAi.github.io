@@ -48,6 +48,7 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
         });
         
         $("body").popover({
+              "container": "body",
               "trigger": "hover",
               "delay": 1,
               "html": true,
