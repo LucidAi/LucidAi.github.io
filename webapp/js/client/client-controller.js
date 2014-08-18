@@ -47,8 +47,11 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
             "placement": "top",
         });
         
-        $(".tip-popover").popover({
-              "trigger": "hover"
+        $("body").popover({
+              "trigger": "hover",
+              "delay": 1,
+              "placement": "right",
+              "selector": ".tip-popover"
         });
 
         NcldApiFactory.getTestGraph().success(function(data){
