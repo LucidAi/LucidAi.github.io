@@ -314,7 +314,7 @@ rect {
                            class="tip-popover"
                            data-toggle="popover"
                            title="{{node.title}}"
-                           data-content="<ul><li>authror:{{node.authors.join(", ").toTitleCase()}}</li><li>source: {{node.sources[0]}}</li></ul> <p>{{node.body|cut:true:256:' ...'}}<p>"
+                           data-content="{{formatContent(node)}}"
                         >
                         
                         
