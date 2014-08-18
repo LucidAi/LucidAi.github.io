@@ -39,7 +39,13 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
             $(this).tab("show");
         });
         $("#relatedTabs a:first").tab("show");
-
+        
+        
+        // Init tooltipe
+        $("tip-tooltip").tooltip({
+            "animation": true,
+            "placement": "top"
+        });
 
         NcldApiFactory.getTestGraph().success(function(data){
             
