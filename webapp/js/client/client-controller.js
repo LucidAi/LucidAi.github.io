@@ -142,12 +142,9 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
                 }
             }
             
-            return "<ul>"
-                     
-                   + ("<li>authror: "
+            return "<ul><li>authror: "
                    + authors
-                   + "</li>") ? authors : ""
-                   + "<li>source: "
+                   + "</li><li>source: "
                    + source
                    + "</li></ul><p><small>"
                    + String.prototype.CutStr(node.body, true, 256, "...")
