@@ -10,6 +10,8 @@ function StoryGraph(data) {
      *
      *
      */
+    
+    console.log(["0.5", data]);
 
     this.data = data;
     this.gfx = {};
