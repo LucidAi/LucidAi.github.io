@@ -14,6 +14,8 @@ function StoryGraph(data) {
     this.data = data;
     this.gfx = {};
     this.distr = null;
+    
+    console.log(["1", this]);
 
 }
 
@@ -49,7 +51,7 @@ StoryGraph.prototype.getCentralNode = function() {
      *
      */
     
-    console.log(this);
+    console.log(["3", this]);
 
      var centralNodeId = this.data.meta.centralNode;
 
