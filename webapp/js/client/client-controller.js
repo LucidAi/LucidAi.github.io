@@ -128,6 +128,18 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
             $scope.SetSelection(referencesList);
         };
 
-
+        
+        //
+        $scope.toolPopoverContent = function(node) {
+            
+            
+            return "<ul><li>authror: "
+                   + node.authors.join(", ").toTitleCase()
+                   + "</li><li>source: "
+                   + node.sources[0]
+                   + "</li></ul><p>"
+                   + node.body
+                   + "<p>";
+        }
 
 }]);
