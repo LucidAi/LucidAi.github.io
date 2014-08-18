@@ -48,6 +48,8 @@ StoryGraph.prototype.getCentralNode = function() {
      *
      *
      */
+    
+    console.log(this);
 
      var centralNodeId = this.data.meta.centralNode;
 
