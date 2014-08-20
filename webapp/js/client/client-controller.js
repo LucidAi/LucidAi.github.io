@@ -14,6 +14,7 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
         $scope.meta                 = null;
         $scope.selection            = [];
         $scope.textSelection        = null;
+        $scope.dateDistr            = null;
         $scope.display = {
 
             // Tab 'ALL'
@@ -64,8 +65,6 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
             $scope.central = $scope.sg.getCentralNode();
             $scope.related = $scope.sg.getNodes();
             $scope.meta = data.meta;
-            $scope.dateDistr = $scope.sg.distr.dateDistr;
-
 
             var distrPlaceId = "storyDistribution";
             var nwPlaceId = "storyNetwork";
@@ -77,6 +76,8 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
 
             $scope.sg.drawDistribution(distrPlaceId, distrWidth, height);
             $scope.sg.drawNetwork(nwPlaceId, nwWidth, height);
+            $scope.dateDistr = $scope.sg.distr.dateDistr;
+
         });
 
 
