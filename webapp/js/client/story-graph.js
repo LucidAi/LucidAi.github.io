@@ -11,13 +11,10 @@ function StoryGraph(data) {
      *
      */
 
-    console.log(["data", data]);
-
     this.data = data;
     this.gfx = {};
     this.distr = null;
-    
-    console.log(["this", this]);
+
 };
 
 

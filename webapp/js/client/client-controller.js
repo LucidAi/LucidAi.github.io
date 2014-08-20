@@ -8,9 +8,6 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
         **/
         
         var graphId = $location.search().g;
-        
-        console.log(graphId);
-        console.log($location.search());
 
         $scope.central              = null;
         $scope.related              = [];
@@ -23,10 +20,6 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
             relatedTabAllReversed:        false,
             relatedTabAllPredicate:       "inSelection",
 
-            // Tab 'SELECTION'
-            relatedTabSelectionReversed:  false,
-            relatedTabSelectionPredicate: "pubDate",
-
             // Tab 'SOURCES'
             relatedTabSourcesReversed:    false,
             relatedTabSourcesPredicate:   "referenceCount",
@@ -34,7 +27,8 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
             // Tab 'AUTHORS'
             relatedTabAuthorsReversed:    false,
             relatedTabAuthorsPredicate:   "referenceCount",
-            
+
+            // Tab 'DATES'
             relatedTabDatesReversed:      false,
             relatedTabDatesPredicate:     "documentsCount"
 
@@ -79,8 +73,6 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
             var nwWidth = document.getElementById(nwPlaceId).offsetWidth;
 
             var height = 300;
-            
-            console.log($scope.sg)
 
             $scope.sg.drawDistribution(distrPlaceId, distrWidth, height);
             $scope.sg.drawNetwork(nwPlaceId, nwWidth, height);
