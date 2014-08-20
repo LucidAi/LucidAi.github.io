@@ -8,6 +8,9 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
         **/
         
         var graphId = $location.search().g;
+        
+        console.log(graphId);
+        console.log($location.search());
 
         $scope.central              = null;
         $scope.related              = [];
