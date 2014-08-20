@@ -33,7 +33,10 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
 
             // Tab 'AUTHORS'
             relatedTabAuthorsReversed:    false,
-            relatedTabAuthorsPredicate:   "referenceCount"
+            relatedTabAuthorsPredicate:   "referenceCount",
+            
+            relatedTabDatesReversed:      false,
+            relatedTabDatesPredicate:     "documentsCount"
 
         };
 
@@ -90,6 +93,15 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
                 $scope.display.relatedTabAllReversed = !$scope.display.relatedTabAllReversed;
             }
             $scope.display.relatedTabAllPredicate = predicate;
+        }
+
+
+        //
+        $scope.RelatedDatesTabOrderBy = function(predicate) {
+            if ($scope.display.relatedTabDatesPredicate == predicate) {
+                $scope.display.relatedTabDatesReversed = !$scope.display.relatedTabDatesReversed;
+            }
+            $scope.display.relatedTabDatesPredicate = predicate;
         }
 
 

@@ -446,7 +446,8 @@ function StoryDistribution(storyGraph, dateMargins, topK) {
         if (this.dateNodes[date]) {
             this.dateDistr.push({
                 "date": date,
-                "nodes": this.dateNodes[date]
+                "nodes": this.dateNodes[date],
+                "documentsCount": this.dateNodes[date].length
             })
         }
     }
