@@ -6,6 +6,8 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
     function ($scope, $location, $sce, NcldApiFactory) {
         /**
         **/
+        
+        var graphId = $location.search().g;
 
         $scope.central              = null;
         $scope.related              = [];
@@ -56,7 +58,7 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
               "selector": ".tip-popover"
         });
 
-        NcldApiFactory.getTestGraph().success(function(data){
+        NcldApiFactory.getTestGraph(graphId).success(function(data){
             
             $scope.sg = new StoryGraph(data);
             $scope.central = $scope.sg.getCentralNode();
