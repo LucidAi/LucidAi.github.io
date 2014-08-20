@@ -442,7 +442,7 @@ rect {
                   </thead>
 
                   <tbody>
-                    <tr ng-repeat="dateEntry in sg.distr.dateDistr">
+                    <tr ng-repeat="dateEntry in dateDistr | orderBy : display.relatedTabDatesPredicate : display.relatedTabDatesReversed">
 
                       <td>{{dateEntry.date}}</td>
 
