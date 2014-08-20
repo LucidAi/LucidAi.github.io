@@ -75,9 +75,9 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
             var distrWidth = document.getElementById(distrPlaceId).offsetWidth;
             var nwWidth = document.getElementById(nwPlaceId).offsetWidth;
 
-            console.log(nwWidth);
-
             var height = 300;
+            
+            console.log($scope.sg)
 
             $scope.sg.drawDistribution(distrPlaceId, distrWidth, height);
             $scope.sg.drawNetwork(nwPlaceId, nwWidth, height);
