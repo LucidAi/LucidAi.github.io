@@ -410,6 +410,53 @@ rect {
 
               <!-- PANE:DATES -->
               <div class="tab-pane fade" id="relatedTabDates">
+                
+
+
+
+                <table class="table table-condensed table-striped">
+                  <thead>
+                    <tr>
+
+                      <td class="text-muted text-uppercase">
+                        <a ng-click="RelatedAllTabOrderBy('inSelection');">
+                          date
+                          <span ng-show="display.relatedTabAllPredicate=='inSelection'">
+                            <span class="glyphicon glyphicon-chevron-down" ng-show="display.relatedTabAllReversed"></span>
+                            <span class="glyphicon glyphicon-chevron-up" ng-show="!display.relatedTabAllReversed"></span>
+                          </span>
+                        </a>
+                      </td>
+
+                      <td class="text-muted text-uppercase" style="width:60px;">
+                        <a ng-click="RelatedAllTabOrderBy('referenceCount');">
+                          documents
+                          <span ng-show="display.relatedTabAllPredicate=='referenceCount'">
+                            <span class="glyphicon glyphicon-chevron-down" ng-show="display.relatedTabAllReversed"></span>
+                            <span class="glyphicon glyphicon-chevron-up" ng-show="!display.relatedTabAllReversed"></span>
+                          </span>
+                        </a>
+                      </td>
+
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr>
+                      <td>
+                      </td>
+                      <td>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+
+
+
+
+
+                
               </div>
               <!-- END:DATES -->
 
