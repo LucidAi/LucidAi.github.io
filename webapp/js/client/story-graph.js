@@ -439,6 +439,17 @@ function StoryDistribution(storyGraph, dateMargins, topK) {
     this.topKIndeces = [];
     for (var i in this.topK)
         this.topKIndeces.push(this.topK[i].node.refId);
+        
+    this.dateDistr = [];
+    for (var i in this.dates) {
+        var date = this.dates[i];
+        if (this.dateNodes[date]) {
+            this.dateDistr.push({
+                "date": date,
+                "nodes": this.dateNodes[date]
+            })
+        }
+    }
 };
 
 

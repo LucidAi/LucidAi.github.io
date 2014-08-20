@@ -442,11 +442,12 @@ rect {
                   </thead>
 
                   <tbody>
-                    <tr>
-                      <td>
-                      </td>
-                      <td>
-                      </td>
+                    <tr ng-repeat="dateEntry in sg.distr.dateDistr">
+
+                      <td>{{dateEntry.date}}</td>
+
+                      <td>{{dateEntry.nodes.length}}</td>
+
                     </tr>
                   </tbody>
                 </table>
