@@ -106,15 +106,6 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
 
 
         //
-        $scope.RelatedSelectionTabOrderBy = function(predicate) {
-            if ($scope.display.relatedTabSelectionPredicate == predicate) {
-                $scope.display.relatedTabSelectionReversed = !$scope.display.relatedTabSelectionReversed;
-            }
-            $scope.display.relatedTabSelectionPredicate = predicate;
-        }
-
-
-        //
         $scope.SetSelection = function(referencesList) {
             for (var i in $scope.selection) {
                 $scope.selection[i].inSelection = null;
