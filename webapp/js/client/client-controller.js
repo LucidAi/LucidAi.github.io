@@ -135,6 +135,18 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
             $scope.SetSelection(referencesList);
         };
 
+
+        //
+        $scope.selectDate = function(dateEntry) {
+            dateEntry.selected = true;
+        };
+
+
+        //
+        $scope.deselectDate = function(dateEntry) {
+            dateEntry.selected = false;
+        };
+
         
         //
         $scope.toolPopoverContent = function(node) {
