@@ -246,11 +246,6 @@ rect {
                 <a role="tab" data-toggle="tab" class="text-uppercase" data-target="#relatedTabDates">dates</a>
               </li>
 
-              <li style="cursor:pointer;" data-toggle="tooltip" class="tip-tooltip" title="See selected articles">
-                <a role="tab" data-toggle="tab" class="text-uppercase"  data-target="#relatedTabSelection">selection {{selection.length}}</a>
-              </li>
-
-
             </ul>
             <!-- END:Related Tabs -->
 
@@ -417,71 +412,6 @@ rect {
               <div class="tab-pane fade" id="relatedTabDates">
               </div>
               <!-- END:DATES -->
-
-
-              <!-- PANE:SELECTION -->
-              <div class="tab-pane fade" id="relatedTabSelection">
-                <table class="table table-condensed table-striped">
-                  <thead>
-                    <tr>
-
-                      <td></td>
-
-                      <td class="text-muted text-uppercase" style="width:60px;">
-                        <a ng-click="RelatedSelectionTabOrderBy('referenceCount');">
-                          ref
-                          <span ng-show="display.relatedTabSelectionPredicate=='referenceCount'">
-                            <span class="glyphicon glyphicon-chevron-down" ng-show="display.relatedTabSelectionReversed"></span>
-                            <span class="glyphicon glyphicon-chevron-up" ng-show="!display.relatedTabSelectionReversed"></span>
-                          </span>
-                        </a>
-                      </td>
-
-                      <td class="text-muted text-uppercase" style="width:60px;">
-                        <a ng-click="RelatedSelectionTabOrderBy('shareCount');">
-                          shr
-                          <span ng-show="display.relatedTabSelectionPredicate=='shareCount'">
-                            <span class="glyphicon glyphicon-chevron-down" ng-show="display.relatedTabSelectionReversed"></span>
-                            <span class="glyphicon glyphicon-chevron-up" ng-show="!display.relatedTabSelectionReversed"></span>
-                          </span>
-                        </a>
-                      </td>
-
-                      <td class="text-muted text-uppercase" style="width:60px;">
-                        <a ng-click="RelatedSelectionTabOrderBy('pubDate');">
-                          pub
-                          <span ng-show="display.relatedTabSelectionPredicate=='pubDate'">
-                            <span class="glyphicon glyphicon-chevron-down" ng-show="display.relatedTabSelectionReversed"></span>
-                            <span class="glyphicon glyphicon-chevron-up" ng-show="!display.relatedTabSelectionReversed"></span>
-                          </span>
-                        </a>
-                      </td>
-
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    <tr ng-repeat="node in selection | orderBy : display.relatedTabSelectionPredicate : display.relatedTabSelectionReversed">
-                      <td>
-                        <span class="glyphicon glyphicon-star" ng-show="node.refId==central.refId"></span>
-                        <a href="{{node.url}}">{{node.title|cut:true:40:' ...'}}</a>
-                      </td>
-                      <td>
-                        {{node.referenceCount}}
-                      </td>
-                      <td>
-                        {{node.shareCount}}
-                      </td>
-                      <td>
-                        <span ng-show="node.pubDate == null">n/a</span>
-                        <span ng-show="node.pubDate != null">{{node.pubDate}}</span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <!-- END:SELECTION -->
-
 
           </div>
         </div>
