@@ -138,13 +138,16 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
 
         //
         $scope.selectDate = function(dateEntry) {
+            console.log("YES");
             dateEntry.selected = true;
+            console.log(dateEntry);
         };
 
 
         //
         $scope.deselectDate = function(dateEntry) {
             dateEntry.selected = false;
+            console.log(dateEntry);
         };
 
         
