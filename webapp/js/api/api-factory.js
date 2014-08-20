@@ -10,7 +10,7 @@ app.factory("NcldApiFactory", ["$http", "$location",
 
             getTestGraph: function() {
                 return $http({
-                    url:    "/webapp/json/0.json",
+                    url:    "/webapp/json/1.json",
                     method: "GET"
                 });
             }
