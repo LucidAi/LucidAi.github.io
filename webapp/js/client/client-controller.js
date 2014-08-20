@@ -2,11 +2,14 @@
  * Author: Vova Zaytsev <zaytsev@usc.edu>
  */
 
+
 app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiFactory",
     function ($scope, $location, $sce, NcldApiFactory) {
+
         /**
-        **/
-        
+          *
+          **/
+
         var graphId = $location.search().g;
 
         $scope.central              = null;
@@ -15,6 +18,7 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
         $scope.selection            = [];
         $scope.textSelection        = null;
         $scope.dateDistr            = null;
+
         $scope.display = {
 
             // Tab 'ALL'

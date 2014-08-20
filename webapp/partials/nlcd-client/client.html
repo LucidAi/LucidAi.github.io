@@ -451,7 +451,18 @@ rect {
 
                       <td>{{dateEntry.documentsCount}}</td>
                       
-                      <td> <button type="button" class="btn btn-default btn-xs">select</button></td>
+                      <td>
+                        <button type="button"
+                                class="btn btn-default btn-xs"
+                                ng-show="!node.selected"
+                                ng-click="selectDate(dateEntry)"
+                                >select</button>
+                        <button type="button"
+                                class="btn btn-default btn-xs"
+                                ng-show="node.selected"
+                                ng-click="selectDate(dateEntry)"
+                                >deselect</button>
+                      </td>
 
                     </tr>
                   </tbody>
