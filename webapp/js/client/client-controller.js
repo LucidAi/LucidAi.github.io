@@ -118,7 +118,7 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
                 $scope.selection.push(item);
             };
             
-            if (referenceList !== 0) {
+            if (referencesList !== 0) {
                 $scope.sg.gfx.SetDistributionSelection(referencesList);
                 $scope.sg.gfx.SetNetworkSelection(referencesList);
             }
