@@ -343,8 +343,7 @@ StoryGraph.prototype.drawNetwork = function(placeId, width, height, config) {
             console.log(d.data.title);
             console.log(d.data);
             console.log("\n\n");
-            
-            // window.open(d.data.url, "_blank");
+            window.open(d.data.url, "_blank");
     
         });
 
