@@ -245,14 +245,6 @@ StoryGraph.prototype.drawNetwork = function(placeId, width, height, config) {
     var linkSelector = svg.selectAll(".link");
     var nodeSelector = svg.selectAll(".node");
 
-    nodeSelector.on("click", function(data) {
-       
-        console.log(["data", data]);
-        
-        console.log(["this", d3.select(this)]);
-        
-    });
-
     force.on("tick", function() {
         
         nodeSelector.each(function(d) {
@@ -345,6 +337,15 @@ StoryGraph.prototype.drawNetwork = function(placeId, width, height, config) {
             .attr("dy", ".35em")
             .attr("class", "nodetext")
             .text(function(d) { return d.data.title; });
+
+        nodeGSelector.on("click", function(data) {
+   
+            console.log(["data", data]);
+    
+            console.log(["this", d3.select(this)]);
+    
+        });
+
 
         linkSelector.exit().remove();
         nodeSelector.exit().remove();
