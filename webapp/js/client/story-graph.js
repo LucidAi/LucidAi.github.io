@@ -339,8 +339,9 @@ StoryGraph.prototype.drawNetwork = function(placeId, width, height, config) {
             .text(function(d) { return d.data.title; });
 
         nodeGSelector.on("click", function(d) {
-   
-            window.open(d.data.url, "_blank");
+            
+            console.log(d.data.title);
+            // window.open(d.data.url, "_blank");
     
         });
 
