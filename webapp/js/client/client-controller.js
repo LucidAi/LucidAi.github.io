@@ -137,7 +137,7 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
 
 
         //
-        $scope.selectDate = function(dateEntry) {
+        $scope.SelectDate = function(dateEntry) {
             console.log("YES");
             dateEntry.selected = true;
             console.log(dateEntry);
@@ -145,7 +145,8 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
 
 
         //
-        $scope.deselectDate = function(dateEntry) {
+        $scope.DeselectDate = function(dateEntry) {
+            console.log("NO");
             dateEntry.selected = false;
             console.log(dateEntry);
         };
