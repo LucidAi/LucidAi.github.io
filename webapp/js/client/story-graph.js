@@ -326,7 +326,7 @@ StoryGraph.prototype.drawNetwork = function(placeId, width, height, config) {
         nodeGSelector = nodeSelector.enter()
             .append("g")
             .attr("class", "node")
-            .call(force.drag);
+            //.call(force.drag);
         nodeGSelector.append("circle")
             .attr("cx", 0)
             .attr("cy", 0)
