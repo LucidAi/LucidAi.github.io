@@ -227,55 +227,51 @@ StoryGraph.prototype.drawNetwork = function(placeId, width, height, config) {
         .attr("width", width)
         .attr("height", height);
 
-    svg.append("rect")
-        .attr("width", width)
-        .attr("height", height);
-
-    var force = d3.layout.force()
-        .gravity(config.gravity)
-        .linkDistance(config.linkDistance)
-        .charge(config.charge)
-        .size([width, height])
-        .nodes([])
-        .links([]);
-
-    var nwNodes = force.nodes();
-    var nwLinks = force.links();
-
-    var linkSelector = svg.selectAll(".link");
-    var nodeSelector = svg.selectAll(".node");
-    var textSelector = svg.selectAll("text.nodecircle");
-    var circleSelector = svg.selectAll("circle.nodetext");
-
-    force.on("tick", function() {
-        
-        nodeSelector.each(function(d) {
-
-          if (d.isFixed) {
-              d.x = d.px = Math.min(d.boxX + 50, Math.max(d.boxX - 50, d.px));
-              d.y = d.py = Math.min(d.boxY + 75, Math.max(d.boxY - 75, d.py));
-          }
-
-        });
-
-
-        linkSelector.attr("x1", function(d) { return d.source.x; })
-            .attr("y1", function(d) { return d.source.y; })
-            .attr("x2", function(d) { return d.target.x; })
-            .attr("y2", function(d) { return d.target.y; });
-
-        nodeSelector.attr("transform", function(d) {
-            var x = Math.max(config.radius, Math.min(width - config.radius, d.x));
-            var y = Math.max(config.radius, Math.min(height - config.radius, d.y));
-            return "translate(" + x + "," + y + ")"; 
-        });
-
-    });
-
     this.gfx.SetNetworkSelection = function(referencesList) {
 
         svg.selectAll("*").remove();
 
+        var force = d3.layout.force()
+            .gravity(config.gravity)
+            .linkDistance(config.linkDistance)
+            .charge(config.charge)
+            .size([width, height])
+            .nodes([])
+            .links([]);
+
+        var nwNodes = force.nodes();
+        var nwLinks = force.links();
+
+        var linkSelector = svg.selectAll(".link");
+        var nodeSelector = svg.selectAll(".node");
+        var textSelector = svg.selectAll("text.nodecircle");
+        var circleSelector = svg.selectAll("circle.nodetext");
+
+        force.on("tick", function() {
+        
+            nodeSelector.each(function(d) {
+
+              if (d.isFixed) {
+                  d.x = d.px = Math.min(d.boxX + 50, Math.max(d.boxX - 50, d.px));
+                  d.y = d.py = Math.min(d.boxY + 75, Math.max(d.boxY - 75, d.py));
+              }
+
+            });
+
+
+            linkSelector.attr("x1", function(d) { return d.source.x; })
+                .attr("y1", function(d) { return d.source.y; })
+                .attr("x2", function(d) { return d.target.x; })
+                .attr("y2", function(d) { return d.target.y; });
+
+            nodeSelector.attr("transform", function(d) {
+                var x = Math.max(config.radius, Math.min(width - config.radius, d.x));
+                var y = Math.max(config.radius, Math.min(height - config.radius, d.y));
+                return "translate(" + x + "," + y + ")"; 
+            });
+
+        });
+        
         nwNodes.splice(0, nwNodes.length);
         nwLinks.splice(0, nwLinks.length);
 
@@ -364,9 +360,6 @@ StoryGraph.prototype.drawNetwork = function(placeId, width, height, config) {
     
         });
 
-
-        linkSelector.exit().remove();
-        nodeSelector.exit().remove();
         force.start();
 
     };
