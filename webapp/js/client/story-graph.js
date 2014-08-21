@@ -244,6 +244,8 @@ StoryGraph.prototype.drawNetwork = function(placeId, width, height, config) {
 
     var linkSelector = svg.selectAll(".link");
     var nodeSelector = svg.selectAll(".node");
+    var textSelector = svg.selectAll("text");
+    var circleSelector = svg.selectAll("circle");
 
     force.on("tick", function() {
         
@@ -349,7 +351,7 @@ StoryGraph.prototype.drawNetwork = function(placeId, width, height, config) {
             .attr("dx", 12)
             .attr("dy", ".35em")
             .attr("class", "nodetext")
-            .text(function(d) { console.log(d.data.title); return d.data.title; });
+            .text(function(d) { return d.data.title; });
 
         nodeGSelector.on("click", function(d) {
             
@@ -363,8 +365,8 @@ StoryGraph.prototype.drawNetwork = function(placeId, width, height, config) {
 
         linkSelector.exit().remove();
         nodeSelector.exit().remove();
-        svg.selectAll("circle").exit().remove();
-        svg.selectAll("text").exit().remove();
+        textSelector.exit().remove();
+        circleSelector.exit().remove();
         force.start();
 
     };
