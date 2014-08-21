@@ -244,8 +244,8 @@ StoryGraph.prototype.drawNetwork = function(placeId, width, height, config) {
 
     var linkSelector = svg.selectAll(".link");
     var nodeSelector = svg.selectAll(".node");
-    var textSelector = svg.selectAll("text");
-    var circleSelector = svg.selectAll("circle");
+    var textSelector = svg.selectAll("text.nodecircle");
+    var circleSelector = svg.selectAll("circle.nodetext");
 
     force.on("tick", function() {
         
