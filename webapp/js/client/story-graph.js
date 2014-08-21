@@ -345,7 +345,11 @@ StoryGraph.prototype.drawNetwork = function(placeId, width, height, config) {
            .attr('height', 200)
            .append('xhtml:div')
            .attr('class', 'pop-div')
-           .html('<a href="#" class="myid" rel="popover" >click me</a>')
+           .html(function(d) {
+               
+               return '<a href="#" class="myid" rel="popover" >' + d.data.title + '</a>';
+               
+           })
 
         // nodeGSelector.append("text")
         //     .attr("dx", 12)
