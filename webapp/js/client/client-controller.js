@@ -106,7 +106,7 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
 
         //
         $scope.SetSelection = function(referencesList) {
-            $scope.DeselectDate($scope.selectedDateEntry);
+
             for (var i in $scope.selection) {
                 $scope.selection[i].inSelection = null;
             };
@@ -117,6 +117,7 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
                 item.inSelection = true;
                 $scope.selection.push(item);
             };
+
             $scope.sg.gfx.SetDistributionSelection(referencesList);
             $scope.sg.gfx.SetNetworkSelection(referencesList);
         };
@@ -124,41 +125,51 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
 
         //
         $scope.TextSelection = function(chunk, referencesList) {
+
+            $scope.SetSelection([]);
+
+            if ($scope.selectedDateEntry) {
+                $scope.SelectDate($scope.selectedDateEntry);
+            }
+
             if ($scope.textSelection) {
                 $scope.textSelection.isSelected = false;
                 if ($scope.textSelection.tagId == chunk.tagId) {
                     $scope.textSelection = null;
-                    $scope.SetSelection([]);
                     return;
                 }
             }
             $scope.textSelection = chunk;
             $scope.textSelection.isSelected = true;
             $scope.SetSelection(referencesList);
+
         };
 
 
         //
         $scope.SelectDate = function(dateEntry) {
-            if ($scope.selectedDateEntry)
-                $scope.DeselectDate($scope.selectedDateEntry);
-            $scope.selectedDateEntry = dateEntry;
+            
+            if ($scope.textSelection) {
+                $scope.TextSelection($scope.textSelection, []);
+            }
+
             $scope.SetSelection([]);
-            $scope.SetSelection(dateEntry.selection);
-            dateEntry.selected = true;
+
+            if ($scope.selectedDateEntry == dateEntry) {
+
+                $scope.selectedDateEntry.selected = false;
+
+            } else {
+
+                $scope.selectedDateEntry = dateEntry;
+                $scope.SetSelection(dateEntry.selection);
+                $scope.selectedDateEntry.selected = true;
+
+            }
+            
             
         };
 
-
-        //
-        $scope.DeselectDate = function(dateEntry) {
-            if ($scope.selectedDateEntry) {
-                $scope.selectedDateEntry = null;
-            }
-            if (dateEntry) {
-                dateEntry.selected = false;
-            }
-        };
 
         //
         $scope.toolPopoverContent = function(node) {
