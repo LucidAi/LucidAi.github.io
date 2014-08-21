@@ -245,6 +245,14 @@ StoryGraph.prototype.drawNetwork = function(placeId, width, height, config) {
     var linkSelector = svg.selectAll(".link");
     var nodeSelector = svg.selectAll(".node");
 
+    nodeSelector.on("click", function(data) {
+       
+        console.log(["data", data]);
+        
+        console.log(["this", d3.select(this)]);
+        
+    });
+
     force.on("tick", function() {
         
         nodeSelector.each(function(d) {
@@ -420,40 +428,43 @@ function StoryDistribution(storyGraph, dateMargins, topK) {
             this.referenceTop[pd] = {"rc": rc, "pd": pd, "node": node};
         }
     }
-    
+
     this.topK = {};
     var topNodes = [];
     for (var pd in this.referenceTop)
         topNodes.push(this.referenceTop[pd]);
-    
+
     topNodes.sort(function(a, b) {
         if(a.rc > b.rc) return -1;
         if(a.rc < b.rc) return 1;
         return 0;        
     });
-    
+
     this.topK = topNodes.slice(0, topK);
     this.topKIndeces = [];
     for (var i in this.topK)
         this.topKIndeces.push(this.topK[i].node.refId);
-        
+
     this.dateDistr = [];
     for (var i in this.dates) {
+
         var date = this.dates[i];
         var nodes = this.dateNodes[date];
+
         if (node) {
-            
+
             var selection = [];
             for (var j in nodes)
                 selection.push(nodes[j].refId);
-            
+
             this.dateDistr.push({
-                "selected": false,
                 "date": date,
                 "nodes": nodes,
+                "selected": false,
                 "selection": selection,
                 "documentsCount": this.dateNodes[date].length
             })
+
         }
     }
 };
