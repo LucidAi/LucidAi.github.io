@@ -440,11 +440,18 @@ function StoryDistribution(storyGraph, dateMargins, topK) {
     this.dateDistr = [];
     for (var i in this.dates) {
         var date = this.dates[i];
-        if (this.dateNodes[date]) {
+        var nodes = this.dateNodes[date];
+        if (node) {
+            
+            var selection = [];
+            for (var j in nodes)
+                selection.push(nodes[j].refId);
+            
             this.dateDistr.push({
                 "selected": false,
                 "date": date,
-                "nodes": this.dateNodes[date],
+                "nodes": nodes,
+                "selection": selection,
                 "documentsCount": this.dateNodes[date].length
             })
         }

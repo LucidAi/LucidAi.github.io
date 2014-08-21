@@ -18,6 +18,7 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
         $scope.selection            = [];
         $scope.textSelection        = null;
         $scope.dateDistr            = null;
+        $scope.selectedDateEntry    = null;
 
         $scope.display = {
 
@@ -105,6 +106,7 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
 
         //
         $scope.SetSelection = function(referencesList) {
+            $scope.DeselectDate($scope.selectedDateEntry);
             for (var i in $scope.selection) {
                 $scope.selection[i].inSelection = null;
             };
@@ -138,20 +140,25 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
 
         //
         $scope.SelectDate = function(dateEntry) {
-            console.log("YES");
+            if ($scope.selectedDateEntry)
+                $scope.DeselectDate($scope.selectedDateEntry);
+            $scope.selectedDateEntry = dateEntry;
+            $scope.SetSelection([]);
+            $scope.SetSelection(dateEntry.selection);
             dateEntry.selected = true;
-            console.log(dateEntry);
+            
         };
 
 
         //
         $scope.DeselectDate = function(dateEntry) {
-            console.log("NO");
+            if ($scope.selectedDateEntry) {
+                $scope.selectedDateEntry = null;
+            }
             dateEntry.selected = false;
-            console.log(dateEntry);
+            $scope.SetSelection([]);
         };
 
-        
         //
         $scope.toolPopoverContent = function(node) {
             
