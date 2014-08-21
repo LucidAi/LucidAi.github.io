@@ -71,6 +71,8 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
             $scope.related = $scope.sg.getNodes();
             $scope.meta = data.meta;
 
+            console.log($scope.sg);
+
             var distrPlaceId = "storyDistribution";
             var nwPlaceId = "storyNetwork";
 
