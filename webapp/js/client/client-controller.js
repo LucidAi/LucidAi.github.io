@@ -158,8 +158,6 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
             if (dateEntry) {
                 dateEntry.selected = false;
             }
-
-            $scope.SetSelection([]);
         };
 
         //
