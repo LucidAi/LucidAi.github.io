@@ -325,20 +325,26 @@ StoryGraph.prototype.drawNetwork = function(placeId, width, height, config) {
         console.log(["nwNodes", nwNodes]);
 
         nodeSelector = nodeSelector.data(nwNodes);
+
         nodeGSelector = nodeSelector.enter()
             .append("g")
             .attr("class", "node")
             //.call(force.drag);
+
         nodeGSelector.append("circle")
             .attr("cx", 0)
             .attr("cy", 0)
             .attr("class", "nodecircle")
             .attr("r", function(d) { return d.radius; });
-        nodeGSelector.append("text")
-            .attr("dx", 12)
-            .attr("dy", ".35em")
-            .attr("class", "nodetext")
+
+        nodeGSelector.append("svg:title")
             .text(function(d) { return d.data.title; });
+
+        // nodeGSelector.append("text")
+        //     .attr("dx", 12)
+        //     .attr("dy", ".35em")
+        //     .attr("class", "nodetext")
+        //     .text(function(d) { return d.data.title; });
 
         nodeGSelector.on("click", function(d) {
             
