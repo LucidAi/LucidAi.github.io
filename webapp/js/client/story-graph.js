@@ -365,8 +365,8 @@ StoryGraph.prototype.drawNetwork = function(placeId, width, height, config) {
 
         linkSelector.exit().remove();
         nodeSelector.exit().remove();
-        console.log(textSelector);
-        console.log(circleSelector);
+        console.log(textSelector.exit);
+        console.log(circleSelector.exit);
         // textSelector.exit().remove();
         // circleSelector.exit().remove();
         force.start();
