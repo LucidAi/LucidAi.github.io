@@ -131,7 +131,7 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
         //
         $scope.TextSelection = function(chunk, referencesList) {
 
-            $scope.SetSelection(0);
+            $scope.SetSelection([]);
 
             if ($scope.selectedDateEntry) {
                 $scope.SelectDate($scope.selectedDateEntry);
@@ -158,7 +158,7 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
                 $scope.TextSelection($scope.textSelection, []);
             }
 
-            $scope.SetSelection(0);
+            $scope.SetSelection([]);
 
             if ($scope.selectedDateEntry == dateEntry) {
 
