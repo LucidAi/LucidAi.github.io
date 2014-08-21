@@ -397,22 +397,21 @@ function StoryDistribution(storyGraph, dateMargins, topK) {
     this.dateNodes = [];
     this.average = 0.0;
     
-    var dSet = {};
-
     for (var i in this.sg.data.nodes) {
         var node = this.sg.data.nodes[i];
         var pd = node.pubDate;
         if (pd) {
 
-            if (!dSet[pd]) {
+            if (this.dateNodes[pd])
+                this.dateNodes[pd].push(node)
+            else {
+                this.dateNodes[pd] = [node];
                 this.dates.push(pd);
-                dSet[pd] = true;
             }
-
-            if (this.dateNodes[pd]) this.dateNodes[pd].push(node)
-            else this.dateNodes[pd] = [node];
         }
     }
+    
+    console.log(this.dateNodes);
     
     var datesNumber = 0;
     for (var d in this.dateNodes) {
