@@ -396,12 +396,19 @@ function StoryDistribution(storyGraph, dateMargins, topK) {
     this.dates = [];
     this.dateNodes = [];
     this.average = 0.0;
+    
+    var dSet = {};
 
     for (var i in this.sg.data.nodes) {
         var node = this.sg.data.nodes[i];
         var pd = node.pubDate;
         if (pd) {
-            this.dates.push(pd);
+
+            if (!dSet[pd]) {
+                this.dates.push(pd);
+                dSet[pd] = true;
+            }
+
             if (this.dateNodes[pd]) this.dateNodes[pd].push(node)
             else this.dateNodes[pd] = [node];
         }
