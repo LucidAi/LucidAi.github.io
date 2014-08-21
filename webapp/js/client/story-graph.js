@@ -198,7 +198,7 @@ StoryGraph.prototype.drawDistribution = function(placeId, width, height) {
             .attr("y", 0)
             .attr("height", height)
             .attr("width", function(dRange) {
-                return 8;
+                return 12;
             });
 
     };
