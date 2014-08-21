@@ -316,15 +316,23 @@ StoryGraph.prototype.drawNetwork = function(placeId, width, height, config) {
                 }
             }
         }
+        
+        var nwLinksC = []
+        var nwNodesC = []
+        
+        for(var i in nwLinks)
+            nwLinksC.push(nwLinks[i])
+        for(var i in nwNodes)
+            nwNodesC.push(nwNodes[i])
 
-        linkSelector = linkSelector.data(nwLinks);
+        linkSelector = linkSelector.data(nwLinksC);
         linkSelector.enter()
             .append("line")
             .attr("class", "link");
             
         console.log(["nwNodes", nwNodes]);
 
-        nodeSelector = nodeSelector.data(nwNodes);
+        nodeSelector = nodeSelector.data(nwNodesC);
 
         nodeGSelector = nodeSelector.enter()
             .append("g")
@@ -337,25 +345,11 @@ StoryGraph.prototype.drawNetwork = function(placeId, width, height, config) {
             .attr("class", "nodecircle")
             .attr("r", function(d) { return d.radius; });
 
-        // nodeGSelector.append("svg:title")
-        //     .text(function(d) { return d.data.title; });
-
-        nodeGSelector.append('svg:foreignObject')
-           .attr('width', 200)
-           .attr('height', 200)
-           .append('xhtml:div')
-           .attr('class', 'pop-div')
-           .html(function(d) {
-               
-               return '<a href="#" class="myid" rel="popover" >' + d.data.title + '</a>';
-               
-           })
-
-        // nodeGSelector.append("text")
-        //     .attr("dx", 12)
-        //     .attr("dy", ".35em")
-        //     .attr("class", "nodetext")
-        //     .text(function(d) { return d.data.title; });
+        nodeGSelector.append("text")
+            .attr("dx", 12)
+            .attr("dy", ".35em")
+            .attr("class", "nodetext")
+            .text(function(d) { return d.data.title; });
 
         nodeGSelector.on("click", function(d) {
             
