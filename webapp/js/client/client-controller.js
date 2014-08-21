@@ -162,6 +162,7 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
 
             } else {
 
+                $scope.selectedDateEntry.selected = false;
                 $scope.selectedDateEntry = dateEntry;
                 $scope.SetSelection(dateEntry.selection);
                 $scope.selectedDateEntry.selected = true;
