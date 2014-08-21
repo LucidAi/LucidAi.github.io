@@ -117,16 +117,19 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
                 item.inSelection = true;
                 $scope.selection.push(item);
             };
+            
+            if (referenceList !=== 0) {
+                $scope.sg.gfx.SetDistributionSelection(referencesList);
+                $scope.sg.gfx.SetNetworkSelection(referencesList);
+            }
 
-            $scope.sg.gfx.SetDistributionSelection(referencesList);
-            $scope.sg.gfx.SetNetworkSelection(referencesList);
         };
 
 
         //
         $scope.TextSelection = function(chunk, referencesList) {
 
-            $scope.SetSelection([]);
+            $scope.SetSelection(0);
 
             if ($scope.selectedDateEntry) {
                 $scope.SelectDate($scope.selectedDateEntry);
@@ -153,7 +156,7 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
                 $scope.TextSelection($scope.textSelection, []);
             }
 
-            $scope.SetSelection([]);
+            $scope.SetSelection(0);
 
             if ($scope.selectedDateEntry == dateEntry) {
 
