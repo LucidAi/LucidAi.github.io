@@ -330,7 +330,7 @@ StoryGraph.prototype.drawNetwork = function(placeId, width, height, config) {
             .append("line")
             .attr("class", "link");
             
-        console.log(["nwNodes", nwNodes]);
+        console.log(["nwNodes", nwNodesC]);
 
         nodeSelector = nodeSelector.data(nwNodesC);
 
