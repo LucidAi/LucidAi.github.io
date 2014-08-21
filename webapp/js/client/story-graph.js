@@ -349,7 +349,7 @@ StoryGraph.prototype.drawNetwork = function(placeId, width, height, config) {
             .attr("dx", 12)
             .attr("dy", ".35em")
             .attr("class", "nodetext")
-            .text(function(d) { console.log(d.data.title;); return d.data.title; });
+            .text(function(d) { console.log(d.data.title); return d.data.title; });
 
         nodeGSelector.on("click", function(d) {
             
