@@ -338,11 +338,9 @@ StoryGraph.prototype.drawNetwork = function(placeId, width, height, config) {
             .attr("class", "nodetext")
             .text(function(d) { return d.data.title; });
 
-        nodeGSelector.on("click", function(data) {
+        nodeGSelector.on("click", function(d) {
    
-            console.log(["data", data]);
-    
-            console.log(["this", d3.select(this)]);
+            window.open(d.data.url, "_blank");
     
         });
 
