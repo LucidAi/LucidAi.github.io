@@ -337,8 +337,15 @@ StoryGraph.prototype.drawNetwork = function(placeId, width, height, config) {
             .attr("class", "nodecircle")
             .attr("r", function(d) { return d.radius; });
 
-        nodeGSelector.append("svg:title")
-            .text(function(d) { return d.data.title; });
+        // nodeGSelector.append("svg:title")
+        //     .text(function(d) { return d.data.title; });
+
+        nodeGSelector.append('svg:foreignObject')
+           .attr('width', 200)
+           .attr('height', 200)
+           .append('xhtml:div')
+           .attr('class', 'pop-div')
+           .html('<a href="#" class="myid" rel="popover" >click me</a>')
 
         // nodeGSelector.append("text")
         //     .attr("dx", 12)
