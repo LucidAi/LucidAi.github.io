@@ -36,7 +36,7 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
 
             // Tab 'DATES'
             relatedTabDatesReversed:      false,
-            relatedTabDatesPredicate:     "documentsCount"
+            relatedTabDatesPredicate:     "date"
 
         };
 
