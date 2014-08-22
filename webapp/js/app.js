@@ -67,3 +67,11 @@ String.prototype.CutStr =  function (value, wordwise, max, tail) {
 
     return value + (tail || " ...");
 };
+
+Object.size = function(obj) {
+    var size = 0, key;
+    for (key in obj) {
+        if (obj.hasOwnProperty(key)) size++;
+    }
+    return size;
+};

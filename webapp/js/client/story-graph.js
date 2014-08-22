@@ -209,11 +209,19 @@ StoryGraph.prototype.drawDistribution = function(placeId, width, height) {
 //
 StoryGraph.prototype.drawNetwork = function(placeId, width, height, config) {
     
+    var ld = 100;
+    if (Object.size(this.data.nodes) < 25) ld = 70;
+    if (Object.size(this.data.nodes) < 50) ld = 130;
+    if (Object.size(this.data.nodes) < 75) ld = 140;
+    if (Object.size(this.data.nodes) < 100) ld = 140;
+    if (Object.size(this.data.nodes) >= 100) ld = 150;
+
     if (!config) {
         config = {
             "gravity": 0.08,
-            "linkDistance": 40,
-            "charge": -200,
+            "linkDistance": ld,
+            "distance": ld,
+            "charge": -100,
             "radius": 6
         }
     }
@@ -354,8 +362,11 @@ StoryGraph.prototype.drawNetwork = function(placeId, width, height, config) {
             window.open(d.data.url, "_blank");
     
         });
-
+        
+        var n = 40;
         force.start();
+            for (var i = n; i > 0; --i) force.tick();
+        force.stop();
 
     };
 
@@ -410,8 +421,6 @@ function StoryDistribution(storyGraph, dateMargins, topK) {
             }
         }
     }
-    
-    console.log(this.dateNodes);
     
     var datesNumber = 0;
     for (var d in this.dateNodes) {

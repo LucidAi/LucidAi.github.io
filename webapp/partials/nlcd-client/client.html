@@ -209,11 +209,27 @@ rect {
 
       <div class="row"  style="padding-left:15px;">
 
-        <div id="storyNetwork" ng-show="{{false}}"></div>
-        <div id="storyNetwork" ng-show="{{true}}">
+        <div id="storyNetwork" ng-show="!tooManyNodes"></div>
+        <div id="storyNetwork" ng-show="tooManyNodes">
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
           <p class="lead text-center">
-            Too many nodes in the graph to visualize, we skip it for now.
+            <small>Too many nodes in the graph to visualize, we skip it for now.</small>
           </p>
+          <div class="row">
+            <div class="col-md-5"></div>
+            <div class="col-md-2">
+              <button type="button"
+                      class="btn btn-danger btn-xs"
+                      ng-click="ForceDrawNetwork()"><span class="glyphicon glyphicon-exclamation-sign"></span> draw anyway</button>
+            </div>
+            <div class="col-md-5"></div>
+          </div>
+          <br/>
         </div>
 
       </div>

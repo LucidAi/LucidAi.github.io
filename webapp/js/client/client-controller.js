@@ -19,7 +19,8 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
         $scope.textSelection        = null;
         $scope.dateDistr            = null;
         $scope.selectedDateEntry    = null;
-
+        $scope.tooManyNodes         = false;
+        
         $scope.display = {
 
             // Tab 'ALL'
@@ -64,28 +65,40 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
               "selector": ".tip-popover"
         });
 
-        NcldApiFactory.getTestGraph(graphId).success(function(data){
+        var distrPlaceId = "storyDistribution";
+        var nwPlaceId = "storyNetwork";
+        var distrWidth = document.getElementById(distrPlaceId).offsetWidth;
+        var nwWidth = document.getElementById(nwPlaceId).offsetWidth;
+        var height = 300;
+
+        NcldApiFactory.getTestGraph("1_6").success(function(data){
             
             $scope.sg = new StoryGraph(data);
             $scope.central = $scope.sg.getCentralNode();
             $scope.related = $scope.sg.getNodes();
-            $scope.meta = data.meta;
-
-            console.log($scope.sg);
-
-            var distrPlaceId = "storyDistribution";
-            var nwPlaceId = "storyNetwork";
-
-            var distrWidth = document.getElementById(distrPlaceId).offsetWidth;
-            var nwWidth = document.getElementById(nwPlaceId).offsetWidth;
-
-            var height = 300;
+            $scope.meta = data.meta;            
+            $scope.tooManyNodes = $scope.related.length > 120;
 
             $scope.sg.drawDistribution(distrPlaceId, distrWidth, height);
-            $scope.sg.drawNetwork(nwPlaceId, nwWidth, height);
+            if (!$scope.tooManyNodes) {
+                $scope.sg.drawNetwork(nwPlaceId, nwWidth, height);
+            }
             $scope.dateDistr = $scope.sg.distr.dateDistr;
 
         });
+        
+        
+        //
+        $scope.ForceDrawNetwork = function() {
+            
+            $scope.tooManyNodes = false;
+            $scope.sg.drawNetwork(nwPlaceId, nwWidth, height);
+            var selection = [];
+            for (var i in $scope.selection)
+                selection.push($scope.selection[i].refId);
+            $scope.sg.gfx.SetNetworkSelection(selection);
+
+        };
 
 
         //
@@ -122,7 +135,8 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
             
             if (referencesList !== 0) {
                 $scope.sg.gfx.SetDistributionSelection(referencesList);
-                $scope.sg.gfx.SetNetworkSelection(referencesList);
+                if (!$scope.tooManyNodes)
+                    $scope.sg.gfx.SetNetworkSelection(referencesList);
             }
 
         };
