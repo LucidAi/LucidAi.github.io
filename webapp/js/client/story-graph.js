@@ -100,7 +100,6 @@ StoryGraph.prototype.drawDistribution = function(placeId, width, height) {
 
     // Interpolate counts
     var line = d3.svg.line()
-        .interpolate("basis")
         .x(function(d) { return xScale(d.key); })
         .y(function(d) { return yScale(d.value); });
 
