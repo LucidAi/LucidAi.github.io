@@ -71,7 +71,7 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
         var nwWidth = document.getElementById(nwPlaceId).offsetWidth;
         var height = 300;
 
-        NcldApiFactory.getTestGraph("1_6").success(function(data){
+        NcldApiFactory.getTestGraph(graphId).success(function(data){
             
             $scope.sg = new StoryGraph(data);
             $scope.central = $scope.sg.getCentralNode();
