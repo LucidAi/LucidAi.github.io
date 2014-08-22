@@ -57,6 +57,7 @@ rect {
 }
 
 .node .nodecircle {
+  cursor: pointer;
   stroke-width: 1.5px;
   fill: rgb(107, 174, 214);
   stroke: rgb(74, 121, 149);
@@ -222,7 +223,7 @@ rect {
             <ul id="relatedTabs" class="nav nav-tabs" role="tablist">
 
               <li style="cursor:pointer;" class="active tip-tooltip" data-toggle="tooltip" title="View all related documents">
-                <a role="tab" data-toggle="tab" class="text-uppercase" data-target="#relatedTabAll">all {{related.length}}</a>
+                <a role="tab" data-toggle="tab" class="text-uppercase" data-target="#relatedTabAll">articles {{related.length}}</a>
               </li>
 
               <li style="cursor:pointer;" data-toggle="tooltip" class="tip-tooltip" title="Filter related by text query">
@@ -246,11 +247,6 @@ rect {
                 <a role="tab" data-toggle="tab" class="text-uppercase" data-target="#relatedTabDates">dates</a>
               </li>
 
-              <li style="cursor:pointer;" data-toggle="tooltip" class="tip-tooltip" title="See selected articles">
-                <a role="tab" data-toggle="tab" class="text-uppercase"  data-target="#relatedTabSelection">selection {{selection.length}}</a>
-              </li>
-
-
             </ul>
             <!-- END:Related Tabs -->
 
@@ -262,7 +258,7 @@ rect {
               <!-- PANE:ALL -->
               <div class="tab-pane fade in active" id="relatedTabAll">
 
-                <table class="table table-condensed table-striped">
+                <table class="table table-condensed table-striped table-bordered">
                   <thead>
                     <tr>
 
@@ -367,7 +363,7 @@ rect {
 
               <!-- PANE:AUTHORS -->
               <div class="tab-pane fade" id="relatedTabAuthors">
-                <table class="table table-condensed table-striped">
+                <table class="table table-condensed table-striped  table-bordered">
                   <thead>
                     <tr>
                       <td></td>
@@ -391,7 +387,7 @@ rect {
 
               <!-- PANE:SOURCES -->
               <div class="tab-pane fade" id="relatedTabSources">
-                <table class="table table-condensed table-striped">
+                <table class="table table-condensed table-striped  table-bordered">
                   <thead>
                     <tr>
                       <td></td>
@@ -415,73 +411,75 @@ rect {
 
               <!-- PANE:DATES -->
               <div class="tab-pane fade" id="relatedTabDates">
-              </div>
-              <!-- END:DATES -->
+                
 
 
-              <!-- PANE:SELECTION -->
-              <div class="tab-pane fade" id="relatedTabSelection">
-                <table class="table table-condensed table-striped">
+
+                <table class="table table-condensed table-striped table-bordered">
                   <thead>
                     <tr>
 
-                      <td></td>
-
-                      <td class="text-muted text-uppercase" style="width:60px;">
-                        <a ng-click="RelatedSelectionTabOrderBy('referenceCount');">
-                          ref
-                          <span ng-show="display.relatedTabSelectionPredicate=='referenceCount'">
-                            <span class="glyphicon glyphicon-chevron-down" ng-show="display.relatedTabSelectionReversed"></span>
-                            <span class="glyphicon glyphicon-chevron-up" ng-show="!display.relatedTabSelectionReversed"></span>
+                      <td class="text-muted text-uppercase">
+                        <a ng-click="RelatedDatesTabOrderBy('date');">
+                          date
+                          <span ng-show="display.relatedTabDatesPredicate=='date'">
+                            <span class="glyphicon glyphicon-chevron-down" ng-show="display.relatedTabDatesReversed"></span>
+                            <span class="glyphicon glyphicon-chevron-up" ng-show="!display.relatedTabDatesReversed"></span>
                           </span>
                         </a>
                       </td>
 
-                      <td class="text-muted text-uppercase" style="width:60px;">
-                        <a ng-click="RelatedSelectionTabOrderBy('shareCount');">
-                          shr
-                          <span ng-show="display.relatedTabSelectionPredicate=='shareCount'">
-                            <span class="glyphicon glyphicon-chevron-down" ng-show="display.relatedTabSelectionReversed"></span>
-                            <span class="glyphicon glyphicon-chevron-up" ng-show="!display.relatedTabSelectionReversed"></span>
+                      <td class="text-muted text-uppercase" style="width:200px;">
+                        <a ng-click="RelatedDatesTabOrderBy('documentsCount');">
+                          documents
+                          <span ng-show="display.relatedTabDatesPredicate=='documentsCount'">
+                            <span class="glyphicon glyphicon-chevron-down" ng-show="display.relatedTabDatesReversed"></span>
+                            <span class="glyphicon glyphicon-chevron-up" ng-show="!display.relatedTabDatesReversed"></span>
                           </span>
                         </a>
                       </td>
-
-                      <td class="text-muted text-uppercase" style="width:60px;">
-                        <a ng-click="RelatedSelectionTabOrderBy('pubDate');">
-                          pub
-                          <span ng-show="display.relatedTabSelectionPredicate=='pubDate'">
-                            <span class="glyphicon glyphicon-chevron-down" ng-show="display.relatedTabSelectionReversed"></span>
-                            <span class="glyphicon glyphicon-chevron-up" ng-show="!display.relatedTabSelectionReversed"></span>
-                          </span>
-                        </a>
+                      
+                      <td  style="width:68px;">
                       </td>
 
                     </tr>
                   </thead>
 
                   <tbody>
-                    <tr ng-repeat="node in selection | orderBy : display.relatedTabSelectionPredicate : display.relatedTabSelectionReversed">
+                    <tr ng-repeat="dateEntry in dateDistr | orderBy : display.relatedTabDatesPredicate : display.relatedTabDatesReversed">
+
+                      <td>{{dateEntry.date}}</td>
+
+                      <td>{{dateEntry.documentsCount}}</td>
+                      
                       <td>
-                        <span class="glyphicon glyphicon-star" ng-show="node.refId==central.refId"></span>
-                        <a href="{{node.url}}">{{node.title|cut:true:40:' ...'}}</a>
+
+                        <button type="button"
+                                class="btn btn-default btn-xs"
+                                ng-show="!dateEntry.selected"
+                                ng-click="SelectDate(dateEntry)"
+                                >select</button>
+
+                        <button type="button"
+                                class="btn btn-danger btn-xs"
+                                ng-show="dateEntry.selected"
+                                ng-click="SelectDate(dateEntry)"
+                                >deselect</button>
+
                       </td>
-                      <td>
-                        {{node.referenceCount}}
-                      </td>
-                      <td>
-                        {{node.shareCount}}
-                      </td>
-                      <td>
-                        <span ng-show="node.pubDate == null">n/a</span>
-                        <span ng-show="node.pubDate != null">{{node.pubDate}}</span>
-                      </td>
+
                     </tr>
                   </tbody>
                 </table>
-              </div>
-              <!-- END:SELECTION -->
 
+
+
+
+
+
+                
+              </div>
+              <!-- END:DATES -->
 
           </div>
         </div>

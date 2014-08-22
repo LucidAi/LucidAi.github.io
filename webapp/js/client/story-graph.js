@@ -11,13 +11,10 @@ function StoryGraph(data) {
      *
      */
 
-    console.log(["data", data]);
-
     this.data = data;
     this.gfx = {};
     this.distr = null;
-    
-    console.log(["this", this]);
+
 };
 
 
@@ -201,7 +198,7 @@ StoryGraph.prototype.drawDistribution = function(placeId, width, height) {
             .attr("y", 0)
             .attr("height", height)
             .attr("width", function(dRange) {
-                return 8;
+                return 12;
             });
 
     };
@@ -230,51 +227,51 @@ StoryGraph.prototype.drawNetwork = function(placeId, width, height, config) {
         .attr("width", width)
         .attr("height", height);
 
-    svg.append("rect")
-        .attr("width", width)
-        .attr("height", height);
-
-    var force = d3.layout.force()
-        .gravity(config.gravity)
-        .linkDistance(config.linkDistance)
-        .charge(config.charge)
-        .size([width, height])
-        .nodes([])
-        .links([]);
-
-    var nwNodes = force.nodes();
-    var nwLinks = force.links();
-
-    var linkSelector = svg.selectAll(".link");
-    var nodeSelector = svg.selectAll(".node");
-
-    force.on("tick", function() {
-        
-        nodeSelector.each(function(d) {
-
-          if (d.isFixed) {
-              d.x = d.px = Math.min(d.boxX + 50, Math.max(d.boxX - 50, d.px));
-              d.y = d.py = Math.min(d.boxY + 75, Math.max(d.boxY - 75, d.py));
-          }
-
-        });
-
-
-        linkSelector.attr("x1", function(d) { return d.source.x; })
-            .attr("y1", function(d) { return d.source.y; })
-            .attr("x2", function(d) { return d.target.x; })
-            .attr("y2", function(d) { return d.target.y; });
-
-        nodeSelector.attr("transform", function(d) {
-            var x = Math.max(config.radius, Math.min(width - config.radius, d.x));
-            var y = Math.max(config.radius, Math.min(height - config.radius, d.y));
-            return "translate(" + x + "," + y + ")"; 
-        });
-
-    });
-
     this.gfx.SetNetworkSelection = function(referencesList) {
 
+        svg.selectAll("*").remove();
+
+        var force = d3.layout.force()
+            .gravity(config.gravity)
+            .linkDistance(config.linkDistance)
+            .charge(config.charge)
+            .size([width, height])
+            .nodes([])
+            .links([]);
+
+        var nwNodes = force.nodes();
+        var nwLinks = force.links();
+
+        var linkSelector = svg.selectAll(".link");
+        var nodeSelector = svg.selectAll(".node");
+        var textSelector = svg.selectAll("text.nodecircle");
+        var circleSelector = svg.selectAll("circle.nodetext");
+
+        force.on("tick", function() {
+        
+            nodeSelector.each(function(d) {
+
+              if (d.isFixed) {
+                  d.x = d.px = Math.min(d.boxX + 50, Math.max(d.boxX - 50, d.px));
+                  d.y = d.py = Math.min(d.boxY + 75, Math.max(d.boxY - 75, d.py));
+              }
+
+            });
+
+
+            linkSelector.attr("x1", function(d) { return d.source.x; })
+                .attr("y1", function(d) { return d.source.y; })
+                .attr("x2", function(d) { return d.target.x; })
+                .attr("y2", function(d) { return d.target.y; });
+
+            nodeSelector.attr("transform", function(d) {
+                var x = Math.max(config.radius, Math.min(width - config.radius, d.x));
+                var y = Math.max(config.radius, Math.min(height - config.radius, d.y));
+                return "translate(" + x + "," + y + ")"; 
+            });
+
+        });
+        
         nwNodes.splice(0, nwNodes.length);
         nwLinks.splice(0, nwLinks.length);
 
@@ -319,30 +316,45 @@ StoryGraph.prototype.drawNetwork = function(placeId, width, height, config) {
                 }
             }
         }
+        
+        var nwLinksC = []
+        var nwNodesC = []
+        
+        for(var i in nwLinks)
+            nwLinksC.push(nwLinks[i])
+        for(var i in nwNodes)
+            nwNodesC.push(nwNodes[i])
 
-        linkSelector = linkSelector.data(nwLinks);
+        linkSelector = linkSelector.data(nwLinksC);
         linkSelector.enter()
             .append("line")
             .attr("class", "link");
+            
+        nodeSelector = nodeSelector.data(nwNodesC);
 
-        nodeSelector = nodeSelector.data(nwNodes);
         nodeGSelector = nodeSelector.enter()
             .append("g")
-            .attr("class", "node")
-            .call(force.drag);
+            .attr("class", "node");
+
         nodeGSelector.append("circle")
             .attr("cx", 0)
             .attr("cy", 0)
             .attr("class", "nodecircle")
-            .attr("r", function(d) { return d.radius; });
+            .attr("r", function(d) { return d.radius; })
+            .call(force.drag);
+
         nodeGSelector.append("text")
             .attr("dx", 12)
             .attr("dy", ".35em")
             .attr("class", "nodetext")
             .text(function(d) { return d.data.title; });
 
-        linkSelector.exit().remove();
-        nodeSelector.exit().remove();
+        nodeGSelector.on("click", function(d) {
+            
+            window.open(d.data.url, "_blank");
+    
+        });
+
         force.start();
 
     };
@@ -384,16 +396,22 @@ function StoryDistribution(storyGraph, dateMargins, topK) {
     this.dates = [];
     this.dateNodes = [];
     this.average = 0.0;
-
+    
     for (var i in this.sg.data.nodes) {
         var node = this.sg.data.nodes[i];
         var pd = node.pubDate;
         if (pd) {
-            this.dates.push(pd);
-            if (this.dateNodes[pd]) this.dateNodes[pd].push(node)
-            else this.dateNodes[pd] = [node];
+
+            if (this.dateNodes[pd])
+                this.dateNodes[pd].push(node)
+            else {
+                this.dateNodes[pd] = [node];
+                this.dates.push(pd);
+            }
         }
     }
+    
+    console.log(this.dateNodes);
     
     var datesNumber = 0;
     for (var d in this.dateNodes) {
@@ -423,22 +441,45 @@ function StoryDistribution(storyGraph, dateMargins, topK) {
             this.referenceTop[pd] = {"rc": rc, "pd": pd, "node": node};
         }
     }
-    
+
     this.topK = {};
     var topNodes = [];
     for (var pd in this.referenceTop)
         topNodes.push(this.referenceTop[pd]);
-    
+
     topNodes.sort(function(a, b) {
         if(a.rc > b.rc) return -1;
         if(a.rc < b.rc) return 1;
         return 0;        
     });
-    
+
     this.topK = topNodes.slice(0, topK);
     this.topKIndeces = [];
     for (var i in this.topK)
         this.topKIndeces.push(this.topK[i].node.refId);
+
+    this.dateDistr = [];
+    for (var i in this.dates) {
+
+        var date = this.dates[i];
+        var nodes = this.dateNodes[date];
+
+        if (node) {
+
+            var selection = [];
+            for (var j in nodes)
+                selection.push(nodes[j].refId);
+
+            this.dateDistr.push({
+                "date": date,
+                "nodes": nodes,
+                "selected": false,
+                "selection": selection,
+                "documentsCount": this.dateNodes[date].length
+            })
+
+        }
+    }
 };
 
 
