@@ -77,7 +77,7 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
             $scope.central = $scope.sg.getCentralNode();
             $scope.related = $scope.sg.getNodes();
             $scope.meta = data.meta;            
-            $scope.tooManyNodes = $scope.related.length > 120;
+            $scope.tooManyNodes = $scope.related.length > 100;
 
             $scope.sg.drawDistribution(distrPlaceId, distrWidth, height);
             if (!$scope.tooManyNodes) {
