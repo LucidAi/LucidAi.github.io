@@ -209,7 +209,12 @@ rect {
 
       <div class="row"  style="padding-left:15px;">
 
-        <div id="storyNetwork"></div>
+        <div id="storyNetwork" ng-show="{{false}}"></div>
+        <div id="storyNetwork" ng-show="{{true}}">
+          <p class="lead text-center">
+            Too many nodes in the graph to visualize, we skip it for now.
+          </p>
+        </div>
 
       </div>
 
