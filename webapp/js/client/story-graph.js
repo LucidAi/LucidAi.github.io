@@ -25,13 +25,16 @@ function StoryGraph(data) {
         for (var j in node.authors) {
             var author = node.authors[j];
             if (this.authorsIndex[author]) {
-                this.authorsIndex[author].selection.push(node.refId);
-                this.authorsIndex[author].referenceCount += 1;
+                var entry = this.authorsIndex[author];
+                entry.selection.push(node.refId);
+                entry.referenceCount += 1;
+                entry.sources = entry.sources.concat(node.sources);
             } else {
                 this.authorsIndex[author] = {
                     "name": author,
                     "selection": [node.refId],
-                    "referenceCount": 1
+                    "referenceCount": 1,
+                    "sources": node.sources
                 };
             }
         }
