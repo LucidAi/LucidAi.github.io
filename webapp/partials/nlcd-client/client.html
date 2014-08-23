@@ -400,7 +400,7 @@ rect {
                   <tbody>
                     <tr ng-repeat="author in authors">
                       <td>
-                        <a ng-click="SetSelection(author.selection)">{{author.name.toTitleCase()}}</a>
+                        <a ng-click="SelectAuthor(author)">{{author.name.toTitleCase()}}</a>
                       </td>
                       <td>
                         {{author.sources.join(", ")}}

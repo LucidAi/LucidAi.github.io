@@ -24,6 +24,7 @@ function StoryGraph(data) {
         var node = this.data.nodes[i];
         for (var j in node.authors) {
             var author = node.authors[j];
+            node.sources.sort();
             if (this.authorsIndex[author]) {
                 var entry = this.authorsIndex[author];
                 entry.selection.push(node.refId);
@@ -35,7 +36,8 @@ function StoryGraph(data) {
                     "name": author,
                     "selection": [node.refId],
                     "referenceCount": 1,
-                    "sources": [node.sources[0]] ? node.sources : []
+                    "sources": [node.sources[0]] ? node.sources : [],
+                    "selected": false
                 };
             }
         }

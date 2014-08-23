@@ -19,6 +19,7 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
         $scope.textSelection        = null;
         $scope.dateDistr            = null;
         $scope.selectedDateEntry    = null;
+        $scope.selectedAuhtorEntry  = null; 
         $scope.tooManyNodes         = false;
         $scope.authors              = [];
         
@@ -196,6 +197,31 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
             
             
         };
+        
+        //
+        $scope.SelectAuthor = function(authorEntry) {
+            
+            if ($scope.textSelection)
+                $scope.TextSelection($scope.textSelection, []);
+            if ($scope.selectedDateEntry)
+                $scope.SelectDate($scope.selectedDateEntry);
+            
+            if ($scope.selectedAuhtorEntry == authorEntry) {
+                $scope.selectedAuhtorEntry.selected = false;
+                $scope.selectedAuhtorEntry = null;
+            } else {
+
+                $scope.SetSelection(authorEntry.selection);
+                
+                if ($scope.selectedAuhtorEntry)
+                    $scope.selectedAuhtorEntry.selected = false;
+
+                $scope.selectedAuhtorEntry = authorEntry;
+                $scope.selectedAuhtorEntry.selected = true;
+
+            }
+
+        }
 
 
         //
