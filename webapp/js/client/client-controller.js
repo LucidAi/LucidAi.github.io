@@ -205,10 +205,13 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
                 $scope.TextSelection($scope.textSelection, []);
             if ($scope.selectedDateEntry)
                 $scope.SelectDate($scope.selectedDateEntry);
-            
+
+             $scope.SetSelection([]);
+
             if ($scope.selectedAuhtorEntry == authorEntry) {
                 $scope.selectedAuhtorEntry.selected = false;
                 $scope.selectedAuhtorEntry = null;
+
             } else {
 
                 $scope.SetSelection(authorEntry.selection);

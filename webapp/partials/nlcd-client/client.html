@@ -398,7 +398,7 @@ rect {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr ng-repeat="author in authors | orderBy : 'referenceCount' : false"
+                    <tr ng-repeat="author in authors | orderBy : 'referenceCount' : true"
                         ng-class="{danger: author.selected}">
                       <td>
                         <a style="cursor:pointer;" ng-click="SelectAuthor(author)">{{author.name.toTitleCase()}}</a>
