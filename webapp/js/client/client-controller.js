@@ -20,6 +20,7 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
         $scope.dateDistr            = null;
         $scope.selectedDateEntry    = null;
         $scope.tooManyNodes         = false;
+        $scope.authors              = [];
         
         $scope.display = {
 
@@ -72,12 +73,14 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
         var height = 300;
 
         NcldApiFactory.getTestGraph(graphId).success(function(data){
-            
+
             $scope.sg = new StoryGraph(data);
             $scope.central = $scope.sg.getCentralNode();
             $scope.related = $scope.sg.getNodes();
             $scope.meta = data.meta;            
             $scope.tooManyNodes = $scope.related.length > 100;
+            $scope.authors = $scope.sg.authorsList;
+            $scope.sources = $scope.sg.sourcesList;
 
             $scope.sg.drawDistribution(distrPlaceId, distrWidth, height);
             if (!$scope.tooManyNodes) {

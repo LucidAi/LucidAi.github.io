@@ -393,13 +393,17 @@ rect {
                   <thead>
                     <tr>
                       <td></td>
+                      <td>sources</td>
                       <td>ref</td>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr ng-repeat="author in meta.authors">
+                    <tr ng-repeat="author in authors">
                       <td>
                         {{author.name.toTitleCase()}}
+                      </td>
+                      <td>
+                        {{author.sources.join(", ")}}
                       </td>
                       <td>
                         {{author.referenceCount}}
