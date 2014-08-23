@@ -392,15 +392,16 @@ rect {
                 <table class="table table-condensed table-striped  table-bordered">
                   <thead>
                     <tr>
-                      <td style="width:200;"></td>
+                      <td class="text-uppercase" style="width:200;">name</td>
                       <td class="text-uppercase">sources</td>
                       <td class="text-uppercase">ref</td>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr ng-repeat="author in authors | orderBy : 'referenceCount' : false">
+                    <tr ng-repeat="author in authors | orderBy : 'referenceCount' : false"
+                        ng-class="{danger: node.inSelection}">
                       <td>
-                        <a ng-click="SelectAuthor(author)">{{author.name.toTitleCase()}}</a>
+                        <a style="cursor:pointer;" ng-click="SelectAuthor(author)">{{author.name.toTitleCase()}}</a>
                       </td>
                       <td>
                         {{author.sources.join(", ")}}
