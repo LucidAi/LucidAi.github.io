@@ -434,7 +434,7 @@ rect {
                   </thead>
                   <tbody>
                     <tr ng-repeat="source in sources | orderBy : 'referenceCount' : true"
-                        ng-class="{danger: author.selected}">
+                        ng-class="{danger: source.selected}">
                       <td>
                         <a style="cursor:pointer;" ng-click="SelectSource(source)">{{source.name}}</a>
                       </td>
