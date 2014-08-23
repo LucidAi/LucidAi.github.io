@@ -43,7 +43,7 @@ function StoryGraph(data) {
             }
         }
 
-        for (var j in node.source) {
+        for (var j in node.sources) {
             var source = node.sources[j];
             if (this.sourcesIndex[source]) {
                 var entry = this.sourcesIndex[source];
