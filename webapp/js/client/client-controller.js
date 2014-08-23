@@ -20,8 +20,10 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
         $scope.dateDistr            = null;
         $scope.selectedDateEntry    = null;
         $scope.selectedAuhtorEntry  = null; 
+        $scope.selectedSourceEntry  = null; 
         $scope.tooManyNodes         = false;
         $scope.authors              = [];
+        $scope.sources              = [];
         
         $scope.display = {
 
