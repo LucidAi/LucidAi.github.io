@@ -14,7 +14,20 @@ function StoryGraph(data) {
     this.data = data;
     this.gfx = {};
     this.distr = null;
-
+    
+    this.authorsIndex = {};
+    this.sourcesIndex = {};
+    this.authorsList = [];
+    this.sourcesList = [];
+    
+    for (var i in this.data.nodes) {
+        var node = this.data.nodes[i];
+        for (var j in node.authors) {
+            var author = node.authors[i];
+            console.log(author);
+        }
+    }
+    
 };
 
 
@@ -283,6 +296,8 @@ StoryGraph.prototype.drawNetwork = function(placeId, width, height, config) {
         nwLinks.splice(0, nwLinks.length);
 
         var nwNodesI = {};
+        var node2LinkI = {};
+        var node2NodeI = {};
 
         if (!referencesList || referencesList.length == 0) {
 
@@ -291,15 +306,25 @@ StoryGraph.prototype.drawNetwork = function(placeId, width, height, config) {
                 nwNodes.push(node);
                 nwNodesI[node.data.refId] = node;
             }
-
+            
+            var linkId = 0;
             for (var i in sg.data.edges) {
                 var edge = sg.data.edges[i];
                 var sourceRefId = edge[0];
                 var targetRefId = edge[1];
                 var sourceNode = nwNodesI[sourceRefId];
                 var targetNode = nwNodesI[targetRefId];
-                var newLink = {"source": sourceNode, "target": targetNode};
+                var newLink = {"source": sourceNode, "target": targetNode, "linkId": "nwLink_" + linkId};
                 nwLinks.push(newLink);
+                
+                if (node2LinkI[sourceRefId]) {
+                    node2LinkI[sourceRefId].push();
+                    node2NodeI[sourceRefId].push();
+                } else {
+                    
+                }
+
+                ++linkId;
             }
 
         } else {
