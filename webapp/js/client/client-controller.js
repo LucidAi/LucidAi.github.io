@@ -157,7 +157,7 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
                 $scope.SelectDate($scope.selectedDateEntry);
             if ($scope.selectedAuthorEntry)
                 $scope.SelectAuthor($scope.selectedAuthorEntry);
-            if ($scope.selectedAuthorEntry)
+            if ($scope.selectedSourceEntry)
                 $scope.SelectSource($scope.selectedSourceEntry);
 
             if ($scope.textSelection) {
@@ -182,7 +182,7 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
                 $scope.TextSelection($scope.textSelection, []);
             if ($scope.selectedAuthorEntry)
                 $scope.SelectAuthor($scope.selectedAuthorEntry);
-            if ($scope.selectedAuthorEntry)
+            if ($scope.selectedSourceEntry)
                 $scope.SelectSource($scope.selectedSourceEntry);
 
             $scope.SetSelection([]);
@@ -214,7 +214,7 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
                 $scope.TextSelection($scope.textSelection, []);
             if ($scope.selectedDateEntry)
                 $scope.SelectDate($scope.selectedDateEntry);
-            if ($scope.selectedAuthorEntry)
+            if ($scope.selectedSourceEntry)
                 $scope.SelectSource($scope.selectedSourceEntry);
 
              $scope.SetSelection([]);
