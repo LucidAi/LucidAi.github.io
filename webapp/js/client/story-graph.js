@@ -30,9 +30,9 @@ function StoryGraph(data) {
             } else {
                 this.authorsIndex[author] = {
                     "name": author,
-                    "selection": [node.refId];
+                    "selection": [node.refId],
                     "referenceCount": 1
-                }
+                };
             }
         }
     }
