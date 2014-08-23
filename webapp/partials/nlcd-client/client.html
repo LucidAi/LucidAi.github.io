@@ -431,14 +431,14 @@ rect {
                 <table class="table table-condensed table-striped  table-bordered">
                   <thead>
                     <tr>
-                      <td></td>
-                      <td>ref</td>
+                      <td class="text-uppercase" >name</td>
+                      <td class="text-uppercase" >ref</td>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr ng-repeat="source in meta.sources">
+                    <tr ng-repeat="source in sources">
                       <td>
-                        {{source.name}}
+                        <a style="cursor:pointer;" ng-click="SelectSource(source)">{{source.name}}</a>
                       </td>
                       <td>
                         {{source.referenceCount}}
