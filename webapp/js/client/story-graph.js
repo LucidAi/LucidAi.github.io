@@ -40,7 +40,9 @@ function StoryGraph(data) {
         }
     }
     
-    console.log(this.authorsIndex);
+    this.authorsList = d3.values(this.authorsIndex);
+    
+    console.log(this.authorsList);
     
 };
 
