@@ -392,7 +392,7 @@ rect {
                 <table class="table table-condensed table-striped  table-bordered">
                   <thead>
                     <tr>
-                      <td style="width:256px;"></td>
+                      <td style="width:200;"></td>
                       <td>sources</td>
                       <td>ref</td>
                     </tr>
@@ -400,7 +400,7 @@ rect {
                   <tbody>
                     <tr ng-repeat="author in authors">
                       <td>
-                        {{author.name.toTitleCase()}}
+                        <a ng-click="SetSelection(author.selection)">{{author.name.toTitleCase()}}</a>
                       </td>
                       <td>
                         {{author.sources.join(", ")}}
