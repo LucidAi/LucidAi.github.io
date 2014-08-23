@@ -41,7 +41,10 @@ function StoryGraph(data) {
     }
     
     this.authorsList = d3.values(this.authorsIndex);
-    
+    for(var i in authorsList){
+        authorsList[i].sources = $.unique(authorsList[i].sources);
+    }
+
     console.log(this.authorsList);
     
 };
