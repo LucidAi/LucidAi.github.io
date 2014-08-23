@@ -63,6 +63,7 @@ function StoryGraph(data) {
     
     this.authorsList = d3.values(this.authorsIndex);
     this.sourcesList = d3.values(this.sourcesIndex);
+    console.log(this.sourcesList);
     for(var i in this.authorsList){
         this.authorsList[i].sources = $.unique(this.authorsList[i].sources);
     }
