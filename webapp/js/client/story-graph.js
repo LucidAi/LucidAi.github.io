@@ -23,7 +23,7 @@ function StoryGraph(data) {
     for (var i in this.data.nodes) {
         var node = this.data.nodes[i];
         for (var j in node.authors) {
-            var author = node.authors[i];
+            var author = node.authors[j];
             console.log(author);
         }
     }
