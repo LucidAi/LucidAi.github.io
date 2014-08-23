@@ -24,9 +24,20 @@ function StoryGraph(data) {
         var node = this.data.nodes[i];
         for (var j in node.authors) {
             var author = node.authors[j];
-            console.log(author);
+            if (this.authorsIndex[author]) {
+                this.authorsIndex[author].selection.push(node.refId);
+                this.authorsIndex[author].referenceCount += 1;
+            } else {
+                this.authorsIndex[author] = {
+                    "name": author,
+                    "selection": [node.refId];
+                    "referenceCount": 1
+                }
+            }
         }
     }
+    
+    console.log(this.authorsIndex);
     
 };
 
