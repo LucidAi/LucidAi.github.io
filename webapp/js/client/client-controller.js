@@ -19,7 +19,7 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
         $scope.textSelection        = null;
         $scope.dateDistr            = null;
         $scope.selectedDateEntry    = null;
-        $scope.selectedAuhtorEntry  = null; 
+        $scope.selectedAuthorEntry  = null; 
         $scope.selectedSourceEntry  = null; 
         $scope.tooManyNodes         = false;
         $scope.authors              = [];
@@ -155,8 +155,10 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
 
             if ($scope.selectedDateEntry)
                 $scope.SelectDate($scope.selectedDateEntry);
-            if ($scope.selectedAuhtorEntry)
-                $scope.SelectAuthor($scope.selectedAuhtorEntry);
+            if ($scope.selectedAuthorEntry)
+                $scope.SelectAuthor($scope.selectedAuthorEntry);
+            if ($scope.selectedAuthorEntry)
+                $scope.SelectSource($scope.selectedSourceEntry);
 
             if ($scope.textSelection) {
                 $scope.textSelection.isSelected = false;
@@ -165,6 +167,7 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
                     return;
                 }
             }
+
             $scope.textSelection = chunk;
             $scope.textSelection.isSelected = true;
             $scope.SetSelection(referencesList);
@@ -177,8 +180,10 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
             
             if ($scope.textSelection)
                 $scope.TextSelection($scope.textSelection, []);
-            if ($scope.selectedAuhtorEntry)
-                $scope.SelectAuthor($scope.selectedAuhtorEntry);
+            if ($scope.selectedAuthorEntry)
+                $scope.SelectAuthor($scope.selectedAuthorEntry);
+            if ($scope.selectedAuthorEntry)
+                $scope.SelectSource($scope.selectedSourceEntry);
 
             $scope.SetSelection([]);
 
@@ -209,22 +214,55 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
                 $scope.TextSelection($scope.textSelection, []);
             if ($scope.selectedDateEntry)
                 $scope.SelectDate($scope.selectedDateEntry);
+            if ($scope.selectedAuthorEntry)
+                $scope.SelectSource($scope.selectedSourceEntry);
 
              $scope.SetSelection([]);
 
-            if ($scope.selectedAuhtorEntry == authorEntry) {
-                $scope.selectedAuhtorEntry.selected = false;
-                $scope.selectedAuhtorEntry = null;
+            if ($scope.selectedAuthorEntry == authorEntry) {
+                $scope.selectedAuthorEntry.selected = false;
+                $scope.selectedAuthorEntry = null;
 
             } else {
 
                 $scope.SetSelection(authorEntry.selection);
                 
-                if ($scope.selectedAuhtorEntry)
-                    $scope.selectedAuhtorEntry.selected = false;
+                if ($scope.selectedAuthorEntry)
+                    $scope.selectedAuthorEntry.selected = false;
 
-                $scope.selectedAuhtorEntry = authorEntry;
-                $scope.selectedAuhtorEntry.selected = true;
+                $scope.selectedAuthorEntry = authorEntry;
+                $scope.selectedAuthorEntry.selected = true;
+
+            }
+
+        }
+
+
+        //
+        $scope.SelectSource = function(sourceEntry) {
+            
+            if ($scope.textSelection)
+                $scope.TextSelection($scope.textSelection, []);
+            if ($scope.selectedDateEntry)
+                $scope.SelectDate($scope.selectedDateEntry);
+            if ($scope.selectedAuthorEntry)
+                $scope.SelectAuthor($scope.selectedAuthorEntry);
+
+             $scope.SetSelection([]);
+
+            if ($scope.selectedSourceEntry == sourceEntry) {
+                $scope.selectedSourceEntry.selected = false;
+                $scope.selectedSourceEntry = null;
+
+            } else {
+
+                $scope.SetSelection(sourceEntry.selection);
+                
+                if ($scope.selectedSourceEntry)
+                    $scope.selectedSourceEntry.selected = false;
+
+                $scope.selectedSourceEntry = sourceEntry;
+                $scope.selectedSourceEntry.selected = true;
 
             }
 

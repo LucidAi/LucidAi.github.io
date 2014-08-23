@@ -22,6 +22,7 @@ function StoryGraph(data) {
     
     for (var i in this.data.nodes) {
         var node = this.data.nodes[i];
+        if (node.sources) node.sources = [node.sources[0]];
 
         for (var j in node.authors) {
             var author = node.authors[j];

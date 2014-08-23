@@ -338,9 +338,6 @@ rect {
                            title="{{node.title}}"
                            data-content="{{toolPopoverContent(node)}}"
                         >
-                        
-                        
-                                              
                           {{node.title|cut:true:40:' ...'}}
                         </a>
                         <!-- <a style="cursor:pointer;">focus</a> -->
@@ -436,7 +433,8 @@ rect {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr ng-repeat="source in sources | orderBy : 'referenceCount' : true">
+                    <tr ng-repeat="source in sources | orderBy : 'referenceCount' : true"
+                        ng-class="{danger: author.selected}">
                       <td>
                         <a style="cursor:pointer;" ng-click="SelectSource(source)">{{source.name}}</a>
                       </td>
