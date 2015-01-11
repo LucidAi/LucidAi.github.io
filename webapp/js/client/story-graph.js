@@ -14,7 +14,64 @@ function StoryGraph(data) {
     this.data = data;
     this.gfx = {};
     this.distr = null;
+    
+    this.authorsIndex = {};
+    this.sourcesIndex = {};
+    this.authorsList = [];
+    this.sourcesList = [];
+    
+    for (var i in this.data.nodes) {
+        var node = this.data.nodes[i];
+        if (node.sources) node.sources = [node.sources[0]];
 
+        for (var j in node.authors) {
+            var author = node.authors[j];
+            node.sources = node.sources.sort();
+            if (this.authorsIndex[author]) {
+                var entry = this.authorsIndex[author];
+                entry.selection.push(node.refId);
+                entry.referenceCount += 1;
+                if (node.sources)
+                    entry.sources.push(node.sources[0]);
+            } else {
+                this.authorsIndex[author] = {
+                    "name": author,
+                    "selection": [node.refId],
+                    "referenceCount": 1,
+                    "sources": [node.sources[0]] ? node.sources : [],
+                    "selected": false
+                };
+            }
+        }
+
+        for (var j in node.sources) {
+            var source = node.sources[j];
+            if (this.sourcesIndex[source]) {
+                var entry = this.sourcesIndex[source];
+                entry.selection.push(node.refId);
+                entry.referenceCount += 1;
+            } else {
+                this.sourcesIndex[source] = {
+                    "name": source,
+                    "selection": [node.refId],
+                    "referenceCount": 1,
+                    "selected": false
+                }
+            }
+        }
+
+    }
+    
+    this.authorsList = d3.values(this.authorsIndex);
+    this.sourcesList = d3.values(this.sourcesIndex);
+    console.log(this.sourcesList);
+    console.log(this.sourcesIndex);
+    for(var i in this.authorsList){
+        this.authorsList[i].sources = $.unique(this.authorsList[i].sources);
+    }
+
+
+    
 };
 
 
@@ -100,7 +157,6 @@ StoryGraph.prototype.drawDistribution = function(placeId, width, height) {
 
     // Interpolate counts
     var line = d3.svg.line()
-        .interpolate("basis")
         .x(function(d) { return xScale(d.key); })
         .y(function(d) { return yScale(d.value); });
 
@@ -209,11 +265,19 @@ StoryGraph.prototype.drawDistribution = function(placeId, width, height) {
 //
 StoryGraph.prototype.drawNetwork = function(placeId, width, height, config) {
     
+    var ld = 100;
+    if (Object.size(this.data.nodes) < 25) ld = 70;
+    if (Object.size(this.data.nodes) < 50) ld = 130;
+    if (Object.size(this.data.nodes) < 75) ld = 140;
+    if (Object.size(this.data.nodes) < 100) ld = 140;
+    if (Object.size(this.data.nodes) >= 100) ld = 150;
+
     if (!config) {
         config = {
             "gravity": 0.08,
-            "linkDistance": 40,
-            "charge": -200,
+            "linkDistance": ld,
+            "distance": ld,
+            "charge": -100,
             "radius": 6
         }
     }
@@ -276,6 +340,8 @@ StoryGraph.prototype.drawNetwork = function(placeId, width, height, config) {
         nwLinks.splice(0, nwLinks.length);
 
         var nwNodesI = {};
+        var node2LinkI = {};
+        var node2NodeI = {};
 
         if (!referencesList || referencesList.length == 0) {
 
@@ -284,15 +350,25 @@ StoryGraph.prototype.drawNetwork = function(placeId, width, height, config) {
                 nwNodes.push(node);
                 nwNodesI[node.data.refId] = node;
             }
-
+            
+            var linkId = 0;
             for (var i in sg.data.edges) {
                 var edge = sg.data.edges[i];
                 var sourceRefId = edge[0];
                 var targetRefId = edge[1];
                 var sourceNode = nwNodesI[sourceRefId];
                 var targetNode = nwNodesI[targetRefId];
-                var newLink = {"source": sourceNode, "target": targetNode};
+                var newLink = {"source": sourceNode, "target": targetNode, "linkId": "nwLink_" + linkId};
                 nwLinks.push(newLink);
+                
+                if (node2LinkI[sourceRefId]) {
+                    node2LinkI[sourceRefId].push();
+                    node2NodeI[sourceRefId].push();
+                } else {
+                    
+                }
+
+                ++linkId;
             }
 
         } else {
@@ -354,8 +430,11 @@ StoryGraph.prototype.drawNetwork = function(placeId, width, height, config) {
             window.open(d.data.url, "_blank");
     
         });
-
+        
+        var n = 40;
         force.start();
+            for (var i = n; i > 0; --i) force.tick();
+        force.stop();
 
     };
 
@@ -410,8 +489,6 @@ function StoryDistribution(storyGraph, dateMargins, topK) {
             }
         }
     }
-    
-    console.log(this.dateNodes);
     
     var datesNumber = 0;
     for (var d in this.dateNodes) {

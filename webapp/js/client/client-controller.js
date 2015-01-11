@@ -19,7 +19,12 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
         $scope.textSelection        = null;
         $scope.dateDistr            = null;
         $scope.selectedDateEntry    = null;
-
+        $scope.selectedAuthorEntry  = null; 
+        $scope.selectedSourceEntry  = null; 
+        $scope.tooManyNodes         = false;
+        $scope.authors              = [];
+        $scope.sources              = [];
+        
         $scope.display = {
 
             // Tab 'ALL'
@@ -64,28 +69,42 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
               "selector": ".tip-popover"
         });
 
+        var distrPlaceId = "storyDistribution";
+        var nwPlaceId = "storyNetwork";
+        var distrWidth = document.getElementById(distrPlaceId).offsetWidth;
+        var nwWidth = document.getElementById(nwPlaceId).offsetWidth;
+        var height = 300;
+
         NcldApiFactory.getTestGraph(graphId).success(function(data){
-            
+
             $scope.sg = new StoryGraph(data);
             $scope.central = $scope.sg.getCentralNode();
             $scope.related = $scope.sg.getNodes();
-            $scope.meta = data.meta;
-
-            console.log($scope.sg);
-
-            var distrPlaceId = "storyDistribution";
-            var nwPlaceId = "storyNetwork";
-
-            var distrWidth = document.getElementById(distrPlaceId).offsetWidth;
-            var nwWidth = document.getElementById(nwPlaceId).offsetWidth;
-
-            var height = 300;
+            $scope.meta = data.meta;            
+            $scope.tooManyNodes = $scope.related.length > 100;
+            $scope.authors = $scope.sg.authorsList;
+            $scope.sources = $scope.sg.sourcesList;
 
             $scope.sg.drawDistribution(distrPlaceId, distrWidth, height);
-            $scope.sg.drawNetwork(nwPlaceId, nwWidth, height);
+            if (!$scope.tooManyNodes) {
+                $scope.sg.drawNetwork(nwPlaceId, nwWidth, height);
+            }
             $scope.dateDistr = $scope.sg.distr.dateDistr;
 
         });
+        
+        
+        //
+        $scope.ForceDrawNetwork = function() {
+            
+            $scope.tooManyNodes = false;
+            $scope.sg.drawNetwork(nwPlaceId, nwWidth, height);
+            var selection = [];
+            for (var i in $scope.selection)
+                selection.push($scope.selection[i].refId);
+            $scope.sg.gfx.SetNetworkSelection(selection);
+
+        };
 
 
         //
@@ -122,7 +141,8 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
             
             if (referencesList !== 0) {
                 $scope.sg.gfx.SetDistributionSelection(referencesList);
-                $scope.sg.gfx.SetNetworkSelection(referencesList);
+                if (!$scope.tooManyNodes)
+                    $scope.sg.gfx.SetNetworkSelection(referencesList);
             }
 
         };
@@ -133,9 +153,12 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
 
             $scope.SetSelection([]);
 
-            if ($scope.selectedDateEntry) {
+            if ($scope.selectedDateEntry)
                 $scope.SelectDate($scope.selectedDateEntry);
-            }
+            if ($scope.selectedAuthorEntry)
+                $scope.SelectAuthor($scope.selectedAuthorEntry);
+            if ($scope.selectedSourceEntry)
+                $scope.SelectSource($scope.selectedSourceEntry);
 
             if ($scope.textSelection) {
                 $scope.textSelection.isSelected = false;
@@ -144,6 +167,7 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
                     return;
                 }
             }
+
             $scope.textSelection = chunk;
             $scope.textSelection.isSelected = true;
             $scope.SetSelection(referencesList);
@@ -154,9 +178,12 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
         //
         $scope.SelectDate = function(dateEntry) {
             
-            if ($scope.textSelection) {
+            if ($scope.textSelection)
                 $scope.TextSelection($scope.textSelection, []);
-            }
+            if ($scope.selectedAuthorEntry)
+                $scope.SelectAuthor($scope.selectedAuthorEntry);
+            if ($scope.selectedSourceEntry)
+                $scope.SelectSource($scope.selectedSourceEntry);
 
             $scope.SetSelection([]);
 
@@ -179,6 +206,67 @@ app.controller("NlcdClientController", ["$scope", "$location", "$sce", "NcldApiF
             
             
         };
+        
+        //
+        $scope.SelectAuthor = function(authorEntry) {
+            
+            if ($scope.textSelection)
+                $scope.TextSelection($scope.textSelection, []);
+            if ($scope.selectedDateEntry)
+                $scope.SelectDate($scope.selectedDateEntry);
+            if ($scope.selectedSourceEntry)
+                $scope.SelectSource($scope.selectedSourceEntry);
+
+             $scope.SetSelection([]);
+
+            if ($scope.selectedAuthorEntry == authorEntry) {
+                $scope.selectedAuthorEntry.selected = false;
+                $scope.selectedAuthorEntry = null;
+
+            } else {
+
+                $scope.SetSelection(authorEntry.selection);
+                
+                if ($scope.selectedAuthorEntry)
+                    $scope.selectedAuthorEntry.selected = false;
+
+                $scope.selectedAuthorEntry = authorEntry;
+                $scope.selectedAuthorEntry.selected = true;
+
+            }
+
+        }
+
+
+        //
+        $scope.SelectSource = function(sourceEntry) {
+            
+            if ($scope.textSelection)
+                $scope.TextSelection($scope.textSelection, []);
+            if ($scope.selectedDateEntry)
+                $scope.SelectDate($scope.selectedDateEntry);
+            if ($scope.selectedAuthorEntry)
+                $scope.SelectAuthor($scope.selectedAuthorEntry);
+
+             $scope.SetSelection([]);
+
+            if ($scope.selectedSourceEntry == sourceEntry) {
+                $scope.selectedSourceEntry.selected = false;
+                $scope.selectedSourceEntry = null;
+
+            } else {
+
+                $scope.SetSelection(sourceEntry.selection);
+                
+                if ($scope.selectedSourceEntry)
+                    $scope.selectedSourceEntry.selected = false;
+
+                $scope.selectedSourceEntry = sourceEntry;
+                $scope.selectedSourceEntry.selected = true;
+
+            }
+
+        }
 
 
         //

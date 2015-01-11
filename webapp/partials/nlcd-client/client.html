@@ -61,11 +61,12 @@ rect {
   stroke-width: 1.5px;
   fill: rgb(107, 174, 214);
   stroke: rgb(74, 121, 149);
+  opacity: 0.9;
 }
 
 .link {
   stroke: rgba(32,32,32,.3);
-  opacity: 1;
+  opacity: 0.3;
   stroke-width: 1px;
 }
 
@@ -209,7 +210,28 @@ rect {
 
       <div class="row"  style="padding-left:15px;">
 
-        <div id="storyNetwork"></div>
+        <div id="storyNetwork" ng-show="!tooManyNodes"></div>
+        <div id="storyNetwork" ng-show="tooManyNodes">
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <p class="lead text-center">
+            <small>Too many nodes in the graph to visualize, we skip it for now.</small>
+          </p>
+          <div class="row">
+            <div class="col-md-5"></div>
+            <div class="col-md-2">
+              <button type="button"
+                      class="btn btn-danger btn-xs"
+                      ng-click="ForceDrawNetwork()"><span class="glyphicon glyphicon-exclamation-sign"></span> draw anyway</button>
+            </div>
+            <div class="col-md-5"></div>
+          </div>
+          <br/>
+        </div>
 
       </div>
 
@@ -240,7 +262,7 @@ rect {
               </li>
 
               <li style="cursor:pointer;" data-toggle="tooltip" class="tip-tooltip" title="View related sources">
-                <a role="tab" data-toggle="tab" class="text-uppercase" data-target="#relatedTabSources">src.</a>
+                <a role="tab" data-toggle="tab" class="text-uppercase" data-target="#relatedTabSources">sources</a>
               </li>
 
               <li style="cursor:pointer;" data-toggle="tooltip" class="tip-tooltip" title="Select documents by dates">
@@ -316,9 +338,6 @@ rect {
                            title="{{node.title}}"
                            data-content="{{toolPopoverContent(node)}}"
                         >
-                        
-                        
-                                              
                           {{node.title|cut:true:40:' ...'}}
                         </a>
                         <!-- <a style="cursor:pointer;">focus</a> -->
@@ -345,6 +364,16 @@ rect {
 
               <!-- PANE:FILTER -->
               <div class="tab-pane fade" id="relatedTabFilter">
+                <div>
+                  <br/>
+                  <br/>
+                  <br/>
+                  <br/>
+                  <br/>
+                  <p class="lead text-center" style="padding:30px;">
+                    <small>Sorry! This tab is not implemented yet :-( Our robots are working hard to finish this soon! Please comeback later.</small>
+                  </p>
+                </div>
               </div>
               <!-- END:FILTER -->
 
@@ -352,9 +381,13 @@ rect {
               <!-- PANE:CIT -->
               <div class="tab-pane fade" id="relatedTabCit">
                 <div>
-                  <p class="lead">
-                    Sorry! This tab is not implemented yet :-(<br/>
-                    Our robots are working hard to finish this soon! Please comeback later.
+                  <br/>
+                  <br/>
+                  <br/>
+                  <br/>
+                  <br/>
+                  <p class="lead text-center" style="padding:30px;">
+                    <small>Sorry! This tab is not implemented yet :-( Our robots are working hard to finish this soon! Please comeback later.</small>
                   </p>
                 </div>
               </div>
@@ -366,14 +399,19 @@ rect {
                 <table class="table table-condensed table-striped  table-bordered">
                   <thead>
                     <tr>
-                      <td></td>
-                      <td>ref</td>
+                      <td class="text-uppercase" style="width:200;">name</td>
+                      <td class="text-uppercase">sources</td>
+                      <td class="text-uppercase">ref</td>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr ng-repeat="author in meta.authors">
+                    <tr ng-repeat="author in authors | orderBy : 'referenceCount' : true"
+                        ng-class="{danger: author.selected}">
                       <td>
-                        {{author.name.toTitleCase()}}
+                        <a style="cursor:pointer;" ng-click="SelectAuthor(author)">{{author.name.toTitleCase()}}</a>
+                      </td>
+                      <td>
+                        {{author.sources.join(", ")}}
                       </td>
                       <td>
                         {{author.referenceCount}}
@@ -390,14 +428,15 @@ rect {
                 <table class="table table-condensed table-striped  table-bordered">
                   <thead>
                     <tr>
-                      <td></td>
-                      <td>ref</td>
+                      <td class="text-uppercase" >name</td>
+                      <td class="text-uppercase" >ref</td>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr ng-repeat="source in meta.sources">
+                    <tr ng-repeat="source in sources | orderBy : 'referenceCount' : true"
+                        ng-class="{danger: source.selected}">
                       <td>
-                        {{source.name}}
+                        <a style="cursor:pointer;" ng-click="SelectSource(source)">{{source.name}}</a>
                       </td>
                       <td>
                         {{source.referenceCount}}
