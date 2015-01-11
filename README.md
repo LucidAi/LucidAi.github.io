@@ -1,4 +1,4 @@
-Lucid.AI
+Lucid.Ai
 ========
 
-Lucid.AI project website.
+Lucid.Ai project website.
